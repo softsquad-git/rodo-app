@@ -9,4 +9,5 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers', 'middlewar
     include 'web/admin.web.php';
     include 'web/inspector.web.php';
     include 'web/user.web.php';
+    include 'web/api.web.php';
 });

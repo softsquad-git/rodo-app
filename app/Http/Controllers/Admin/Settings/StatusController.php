@@ -47,7 +47,7 @@ class StatusController extends Controller
             return response()->json([
                 'success' => 0,
                 'message' => __('api.notification.no_exist')
-            ], 401);
+            ], 404);
         }
 
         return new StatusResource($item);
@@ -80,10 +80,10 @@ class StatusController extends Controller
             return response()->json([
                 'success' => 0,
                 'message' => __('api.notification.no_exist')
-            ], 401);
+            ], 404);
         }
 
-        $this->statusService->save($request->all(), $item);
+        $this->statusService->save($data, $item);
 
         return response()->json([
             'success' => 1,

@@ -2,13 +2,7 @@
     <div class="block block-rounded">
         <div class="block-header block-header-default d-block">
             <button class="btn btn-sm" :class="type == 'app' ? 'btn-primary' : 'btn-outline-primary'" @click="check('app')">Ustawienia aplikacji</button>
-            <button class="btn btn-sm" :class="type == 'status' ? 'btn-primary' : 'btn-outline-primary'" @click="check('status')">Statusy</button>
-            <button v-if="isShowTrash" @click="remove" type="button" class="btn btn-sm btn-alt-secondary" style="float: right" data-bs-original-title="Usuń">
-                <i class="fa fa-fw fa-trash"></i>
-            </button>
-            <button v-if="isShowAdd" data-bs-toggle="modal" data-bs-target="#createItem" type="button" class="btn btn-sm btn-alt-success" style="float: right; margin-right: 5px" title="Dodaj">
-                <i class="fa fa-fw fa-plus"></i>
-            </button>
+            <button class="btn btn-sm" :class="type == 'data' ? 'btn-primary' : 'btn-outline-primary'" @click="check('data')">Dane</button>
         </div>
         <component
             :is="currentComponent"
@@ -25,7 +19,7 @@
 
 <script>
 import SettingApp from "./partials/SettingApp";
-import Status from "./partials/Status";
+import SettingsData from "./partials/SettingsDataComponent";
 
 export default {
     name: "SettingsComponent",
@@ -33,8 +27,6 @@ export default {
         return {
             currentComponent: SettingApp,
             type: 'app',
-            isShowTrash: false,
-            isShowAdd: false
         }
     },
     props: {
@@ -51,8 +43,8 @@ export default {
             if (type === 'app') {
                 return this.currentComponent = SettingApp;
             }
-            if (type === 'status') {
-                return this.currentComponent = Status;
+            if (type === 'data') {
+                return this.currentComponent = SettingsData;
             }
         },
         remove() {

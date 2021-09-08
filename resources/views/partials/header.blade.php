@@ -57,9 +57,8 @@
                             <span class="fs-sm fw-medium">Inbox</span>
                             <span class="badge rounded-pill bg-primary ms-2">3</span>
                         </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="be_pages_generic_profile.html">
-                            <span class="fs-sm fw-medium">Profile</span>
-                            <span class="badge rounded-pill bg-primary ms-2">1</span>
+                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route(__('navbar.admin.profile.route')) }}">
+                            <span class="fs-sm fw-medium">{{ __('navbar.admin.profile.title') }}</span>
                         </a>
                         <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                             <span class="fs-sm fw-medium">Settings</span>
@@ -67,12 +66,12 @@
                     </div>
                     <div role="separator" class="dropdown-divider m-0"></div>
                     <div class="p-2">
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_lock.html">
-                            <span class="fs-sm fw-medium">Lock Account</span>
-                        </a>
-                        <a class="dropdown-item d-flex align-items-center justify-content-between" href="op_auth_signin.html">
-                            <span class="fs-sm fw-medium">Log Out</span>
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="#" onclick="$(this).closest('form').submit()">
+                                <span class="fs-sm fw-medium">{{ __('trans.logout') }}</span>
+                            </a>
+                        </form>
                     </div>
                 </div>
             </div>

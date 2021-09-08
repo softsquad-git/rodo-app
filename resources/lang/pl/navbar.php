@@ -21,13 +21,13 @@ return [
         ],
         'clients' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'admin.clients.index',
             'title' => 'Klienci',
             'icon' => 'si si-people'
         ],
         'users' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'admin.users.index',
             'title' => 'Użytkownicy',
             'icon' => 'si si-people'
         ],
@@ -90,7 +90,7 @@ return [
         ],
         'event_log' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'admin.logs.index',
             'title' => 'Rejestr zdarzeń',
             'icon' => 'si si-lock'
         ],

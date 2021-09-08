@@ -20,6 +20,14 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/media/favicons/apple-touch-icon-180x180.png') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        ._mr-10 {
+            margin-right: 10px;
+        }
+        .w-150 {
+            width: 150px;
+        }
+    </style>
 </head>
 <body>
 <div id="page-container"
@@ -32,6 +40,32 @@
     </main>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('assets/sweetalert2/sweetalert2.js') }}"></script>
+<script>
+    $('.remove-form').click(function (e) {
+        let $form = $(this).closest('form');
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success w-150',
+                cancelButton: 'btn btn-danger _mr-10 w-150'
+            },
+            buttonsStyling: false,
+        })
+        swalWithBootstrapButtons.fire({
+            title: 'Czy na pewno?',
+            text: 'Czy na pewno chcesz usunać dany element?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Tak',
+            cancelButtonText: 'Nie',
+            reverseButtons: true
+        }).then((result) => {
+            if(result.value) {
+                $form.submit();
+            }
+        })
+    })
+</script>
 @yield('customJs')
 </body>
 </html>

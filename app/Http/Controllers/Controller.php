@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\UserLog;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -10,7 +11,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, UserLog;
 
     /**
      * @param object|null $object
@@ -20,9 +21,22 @@ class Controller extends BaseController
     {
         if (!$object) {
             return redirect()->back()
-                ->with('notifications.error.object_no_exist');
+                ->with('notification.error', __('notifications.error.object_no_exist'));
         }
 
         return $object;
+    }
+
+    /**
+     * @param string $ordering
+     * @return string
+     */
+    protected function checkOrdering(string $ordering): string
+    {
+        if ($ordering != 'DESC' && $ordering != 'desc' && $ordering != 'ASC' && $ordering != 'asc') {
+            return 'DESC';
+        }
+
+        return $ordering;
     }
 }

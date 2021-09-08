@@ -12,7 +12,8 @@ class Role
     public static array $role = [
         'ADMIN' => 'ADMIN',
         'USER' => 'USER',
-        'INSPECTOR' => 'INSPECTOR'
+        'INSPECTOR' => 'INSPECTOR',
+        'EMPLOYEE' => 'EMPLOYEE'
     ];
 
     /**

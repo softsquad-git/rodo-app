@@ -20,6 +20,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property bool is_active
  * @method static create(array $data)
  * @method static find(int $id)
+ * @method static orderBy(string $string, string $ordering)
+ * @property string $avatarDir
  */
 class User extends Authenticatable
 {
@@ -28,7 +30,7 @@ class User extends Authenticatable
     /**
      * @var string $avatarDir
      */
-    protected static string $avatarDir = 'assets/data/avatars/';
+    public static string $avatarDir = 'assets/data/avatars/';
 
     /**
      * @var array $fillable

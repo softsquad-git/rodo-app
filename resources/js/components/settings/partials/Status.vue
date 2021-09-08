@@ -1,5 +1,5 @@
 <template>
-    <div class="block-content block-content-full">
+    <div class="div">
         <table class="table">
             <thead>
             <tr>

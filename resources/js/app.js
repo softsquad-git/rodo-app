@@ -4,7 +4,9 @@ window.Vue = require('vue').default;
 import Vue from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import { BootstrapVue } from 'bootstrap-vue'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+Vue.use(BootstrapVue)
 Vue.use(VueSweetalert2);
 Vue.prototype.$axios = window.axios;
 

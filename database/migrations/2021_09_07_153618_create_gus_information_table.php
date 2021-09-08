@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLogTable extends Migration
+class CreateGusInformationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateLogTable extends Migration
      */
     public function up()
     {
-        Schema::create('log', function (Blueprint $table) {
+        Schema::create('gus_information', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('resource_id')->index();
+            $table->string('resource_type');
+            $table->string('name');
+            $table->string('nip');
+            $table->string('regon');
+            $table->string('krs')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ class CreateLogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('log');
+        Schema::dropIfExists('gus_information');
     }
 }
