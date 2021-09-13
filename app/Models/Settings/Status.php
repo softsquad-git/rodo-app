@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static find(int $id)
  * @method static where(array $filters)
  * @method static create(array $data)
+ * @property string resource_type
  */
 class Status extends Model
 {
@@ -26,7 +27,8 @@ class Status extends Model
      * @var string[] $fillable
      */
     protected $fillable = [
-        'name'
+        'name',
+        'resource_type'
     ];
 
     /**

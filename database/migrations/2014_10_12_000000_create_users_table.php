@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar_img')->nullable();
             $table->string('role');
             $table->boolean('is_active')->default(0);
+            $table->unsignedInteger('status_id')->nullable()->index();
+            $table->unsignedInteger('type_id')->nullable()->index();
             $table->rememberToken();
             $table->timestamps();
         });

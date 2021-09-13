@@ -37,7 +37,9 @@ return [
             'last_name' => 'Nazwisko',
             'email' => 'E-mail',
             'type_account' => 'Rodzaj konta',
-            'password' => 'Hasło'
+            'password' => 'Hasło',
+            'password_confirm' => 'Powtórz hasło',
+            'status' => 'Status'
         ]
     ],
     'clients' => [
@@ -80,6 +82,51 @@ return [
             'name' => 'Nazwa',
             'type' => 'Typ',
             'status' => 'Status'
+        ]
+    ],
+    'notifications' => [
+        'removed' => 'Dane zostały usunięte',
+        'updated' => 'Dane zostały zmienione',
+        'created' => 'Dane zostały zapisane',
+        'no_exist' => 'Obiekt nie istnieje'
+    ],
+    'trainings' => [
+        'title' => 'Szkolenia',
+        'form' => [
+            'create' => [
+                'title' => 'Dodaj szkolenie'
+            ],
+            'edit' => [
+                'title' => 'Edytuj szkolenie'
+            ],
+            'name' => 'Nazwa szkolenia',
+            'group' => 'Grupa',
+            'file' => 'Materiał (plik PDF)',
+            'description' => 'Opis szkolenia'
+        ],
+        'groups' => [
+            'title' => 'Grupy szkoleń',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj grupe'
+                ],
+                'edit' => [
+                    'title' => 'Zmień dane grupy'
+                ],
+                'name' => 'Nazwa'
+            ]
+        ]
+    ],
+    'roles' => [
+        'title' => 'Role',
+        'form' => [
+            'create' => [
+                'title' => 'Dodaj rolę'
+            ],
+            'edit' => [
+                'title' => 'Edytuj rolę'
+            ],
+            'name' => 'Nazwa'
         ]
     ]
 ];

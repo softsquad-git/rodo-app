@@ -24,8 +24,6 @@
                                 <th scope="col">{{ __('admin.logs.items.action') }}</th>
                                 <th scope="col">{{ __('admin.logs.items.resource') }}</th>
                                 <th scope="col">{{ __('admin.logs.items.created_at') }}</th>
-                                <th scope="col">
-                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,17 +35,6 @@
                                     <td>{{ __('trans.actions.'.$item->action) }}</td>
                                     <td>---</td>
                                     <td>{{ $item->created_at }}</td>
-                                    <td>
-                                        <form action="{{ route('admin.logs.remove', ['id' => $item->id]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <div class="btn-group">
-                                                <button type="button" class="btn remove-form btn-sm btn-alt-secondary js-bs-tooltip-enabled" data-bs-toggle="tooltip" title="" data-bs-original-title="Usuń">
-                                                    <i class="fa fa-fw fa-times"></i>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

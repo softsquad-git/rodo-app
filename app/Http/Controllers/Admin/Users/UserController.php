@@ -3,31 +3,47 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Helpers\Role;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Requests\Users\UserRequest;
+use App\Http\Resources\Users\UserResource;
 use App\Models\Users\User;
+use App\Repositories\Settings\StatusRepository;
 use App\Repositories\Users\UserRepository;
 use App\Services\Users\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use \Illuminate\Contracts\View\View;
-use \Illuminate\Contracts\View\Factory;
-use \Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Exception;
 
-class UserController extends Controller
+class UserController extends ApiController
 {
     public function __construct(
         private UserRepository $userRepository,
-        private UserService $userService
+        private UserService $userService,
+        private StatusRepository $statusRepository
     )
     {
     }
 
     /**
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index(Request $request): Application|Factory|View
+    public function __invoke(): Application|Factory|View
+    {
+        return view('admin.users.index', [
+            'title' => __('admin.users.title')
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     */
+    public function all(Request $request): AnonymousResourceCollection
     {
         $filters = $request->all();
         $filters['role'] = Role::$role['INSPECTOR'];
@@ -38,12 +54,14 @@ class UserController extends Controller
             $request->get('pagination', 20)
         );
 
-        return view('admin.users.index', [
-            'data' => $data,
-            'title' => __('admin.users.title')
-        ]);
+        return UserResource::collection($data);
     }
 
+    /**
+     * @param UserRequest $request
+     * @return Application|Factory|View|RedirectResponse
+     * @throws Exception
+     */
     public function create(UserRequest $request): Application|Factory|View|RedirectResponse
     {
         if ($request->isMethod('POST')) {
@@ -55,7 +73,8 @@ class UserController extends Controller
 
         return \view('admin.users.form', [
             'item' => new User(),
-            'title' => __('admin.users.form.create.title')
+            'title' => __('admin.users.form.create.title'),
+            'statuses' => $this->statusRepository->findAll('inspector')
         ]);
     }
 
@@ -76,23 +95,28 @@ class UserController extends Controller
 
         return \view('admin.users.form', [
             'item' => $item,
-            'title' => __('admin.users.form.update.title')
+            'title' => __('admin.users.form.update.title'),
+            'statuses' => $this->statusRepository->findAll()
         ]);
     }
 
     /**
      * @param int $id
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function remove(int $id): RedirectResponse
+    public function remove(int $id): JsonResponse
     {
         /**
          * @var User $item
          */
         $item = $this->objectNoExist($this->userRepository->find($id));
+
+        if (!$item) {
+            return $this->itemNoExist();
+        }
+
         $this->userService->remove($item);
 
-        return redirect()->route('admin.users.index')
-            ->with('notification.success', __('notifications.success.removed'));
+        return $this->successRemoved();
     }
 }

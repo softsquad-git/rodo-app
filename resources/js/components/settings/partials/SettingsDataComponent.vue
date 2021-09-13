@@ -27,6 +27,7 @@
 <script>
 import Status from "./Status";
 import ListTypesComponent from "./ListTypesComponent";
+import ListTypesAccountComponent from "./ListTypesAccountComponent";
 
 export default {
     name: "SettingsDataComponent",
@@ -52,6 +53,9 @@ export default {
             }
             if(type === 'types_clients') {
                 return this.dataCurrentComponent = ListTypesComponent
+            }
+            if(type === 'types_inspector') {
+                return this.dataCurrentComponent = ListTypesAccountComponent
             }
         },
         remove() {

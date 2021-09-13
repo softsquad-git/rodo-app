@@ -94,7 +94,7 @@
     <div class="js-sidebar-scroll">
         <!-- Side Navigation -->
         <div class="content-side">
-            @include('partials.navs.partials.admin')
+            @include('partials.navs.partials.'.\Illuminate\Support\Facades\Auth::user()->role)
 
         </div>
         <!-- END Side Navigation -->

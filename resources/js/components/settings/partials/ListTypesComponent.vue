@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         getList() {
-            this.$axios.get('/administration/api/settings/types')
+            this.$axios.get(`/administration/api/settings/types?resource_type=client`)
             .then((data) => {
                 this.types = data.data.data;
             })

@@ -3,7 +3,7 @@ window._ = require('lodash');
 
 try {
     window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require('./theme/lib/jquery.min');
 
     require('bootstrap');
     require('./theme/oneui.app.min');

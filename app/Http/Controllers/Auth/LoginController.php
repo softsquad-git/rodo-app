@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Role;
 use App\Http\Controllers\Controller;
 use App\Models\Log\Log;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -25,10 +27,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * @param Request $request
-     * @param $user
-     */
     protected function authenticated(Request $request, $user)
     {
         $this->setAction(Log::$actions['login'])
@@ -37,5 +35,12 @@ class LoginController extends Controller
             ->setResourceId(null)
             ->setResourceType(null)
             ->save();
+
+        if ($user->role == Role::$role['ADMIN']) {
+            return redirect()->route('admin.index');
+        }
+        if ($user->role == Role::$role['INSPECTOR']) {
+            return redirect()->route('inspector.index');
+        }
     }
 }

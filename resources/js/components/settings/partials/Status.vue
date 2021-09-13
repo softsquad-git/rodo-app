@@ -35,6 +35,12 @@
                             <div class="form-group">
                                 <input type="text" v-model="data.name" aria-label="Nazwa" placeholder="Nazwa" class="form-control form-control-alt">
                             </div>
+                            <div class="form-group">
+                                <select class="form-control form-control-alt" v-model="data.resource_type">
+                                    <option value="" selected>Tabela</option>
+                                    <option v-for="resource in resources" :value="resource.type">{{ resource.name }}</option>
+                                </select>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -54,8 +60,23 @@ export default {
             status: [],
             ids: [],
             data: {
-                name: ''
+                name: '',
+                resource_type: ''
             },
+            resources: [
+                {
+                    type: 'client',
+                    name: 'Klient'
+                },
+                {
+                    type: 'training',
+                    name: 'Szkolenie'
+                },
+                {
+                    type: 'inspector',
+                    name: 'Inspektor'
+                }
+            ]
         }
     },
     props: {

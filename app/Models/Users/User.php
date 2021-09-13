@@ -2,7 +2,9 @@
 
 namespace App\Models\Users;
 
+use App\Models\Settings\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -22,6 +24,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static find(int $id)
  * @method static orderBy(string $string, string $ordering)
  * @property string $avatarDir
+ * @property int|null status_id
  */
 class User extends Authenticatable
 {
@@ -42,7 +45,8 @@ class User extends Authenticatable
         'password',
         'avatar_img',
         'role',
-        'is_active'
+        'is_active',
+        'status_id'
     ];
 
     /**
@@ -80,4 +84,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(Status::class)->withDefault();
+    }
 }

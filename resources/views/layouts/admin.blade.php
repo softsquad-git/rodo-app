@@ -20,14 +20,8 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/media/favicons/apple-touch-icon-180x180.png') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <style>
-        ._mr-10 {
-            margin-right: 10px;
-        }
-        .w-150 {
-            width: 150px;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 </head>
 <body>
 <div id="page-container"
@@ -65,6 +59,15 @@
             }
         })
     })
+
+
+</script>
+<script>
+    CKEDITOR.replaceClass = 'editor';
+</script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $('.js-example-basic-multiple').select2()
 </script>
 @yield('customJs')
 </body>

@@ -99,4 +99,12 @@ class Client extends Model
         return $this->hasOne(ClientSmtpConfiguration::class, 'client_id')
             ->withDefault();
     }
+
+    /**
+     * @return HasMany
+     */
+    public function certificates(): HasMany
+    {
+        return $this->hasMany(ClientCertificate::class, 'client_id');
+    }
 }

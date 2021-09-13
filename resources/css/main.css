@@ -26,3 +26,14 @@
     margin-bottom: 5px;
     text-align: center;
 }
+.text-right {text-align: right!important;}
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #dfe3ea!important;
+    height: 38px!important;
+}
+._mr-10 {
+    margin-right: 10px;
+}
+.w-150 {
+    width: 150px;
+}

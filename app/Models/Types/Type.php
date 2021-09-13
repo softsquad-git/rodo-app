@@ -24,6 +24,14 @@ class Type extends Model
     protected $table = 'types';
 
     /**
+     * @var array|string[] $resourceTypes
+     */
+    public static array $resourceTypes = [
+        'client' => 'client',
+        'inspector' => 'inspector'
+    ];
+
+    /**
      * @var string[] $fillable
      */
     protected $fillable = [

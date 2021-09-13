@@ -24,11 +24,16 @@ class StatusRepository
     }
 
     /**
+     * @param string|null $resourceType
      * @return Collection|array
      */
-    public function findAll(): Collection|array
+    public function findAll(?string $resourceType): Collection|array
     {
-        return Status::all();
+        if (!$resourceType) {
+            return Status::all();
+        }
+
+        return Status::where(['resource_type' => $resourceType])->get();
     }
 
     /**

@@ -29,4 +29,19 @@
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
+    <div class="col-md-4">
+        <label class="form-label" for="password_confirm">{{ __('admin.users.form.password_confirm') }}</label>
+        <input type="text" class="form-control" id="password_confirm" name="password_confirmation" placeholder="{{ __('admin.users.form.password_confirm') }}">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" for="password_confirm">{{ __('admin.users.form.status') }}</label>
+        <select class="form-control" id="status_id" name="status_id">
+            @foreach($statuses as $status)
+                <option value="{{ $status->id }}"{{ $item->status_id ? ($item->status_id == $status->id ? 'selected' : '') : (old('data.status_id') == $status->id ? 'selected' : '')  }}>{{ $status->name }}</option>
+            @endforeach
+        </select>
+        @error('data.status_id')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 </div>

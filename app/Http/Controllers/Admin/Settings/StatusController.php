@@ -26,11 +26,12 @@ class StatusController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return AnonymousResourceCollection
      */
-    public function all(): AnonymousResourceCollection
+    public function all(Request $request): AnonymousResourceCollection
     {
-        $status = $this->statusRepository->findAll();
+        $status = $this->statusRepository->findAll($request->get('resource_type'));
 
         return StatusResource::collection($status);
     }

@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\Admin\Clients;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Requests\Clients\ClientRequest;
+use App\Http\Resources\Clients\ClientsResource;
 use App\Models\Clients\Client;
 use App\Repositories\Clients\ClientRepository;
 use App\Repositories\Settings\StatusRepository;
 use App\Repositories\Settings\TypeRepository;
 use App\Services\Clients\ClientService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\Foundation\Application;
 use Exception;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
-class ClientController extends Controller
+class ClientController extends ApiController
 {
     public function __construct(
         private ClientRepository $clientRepository,
@@ -28,10 +32,20 @@ class ClientController extends Controller
     }
 
     /**
-     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index(Request $request): Application|Factory|View
+    public function __invoke(): Application|Factory|View
+    {
+        return view('admin.clients.index', [
+            'title' => __('admin.clients.index')
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     */
+    public function all(Request $request): AnonymousResourceCollection
     {
         $data = $this->clientRepository->findBy(
             $request->all(),
@@ -40,10 +54,7 @@ class ClientController extends Controller
             $request->get('pagination', 20)
         );
 
-        return view('admin.clients.index', [
-            'title' => __('admin.clients.index'),
-            'data' => $data
-        ]);
+        return ClientsResource::collection($data);
     }
 
     /**
@@ -98,18 +109,41 @@ class ClientController extends Controller
 
     /**
      * @param int $id
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function remove(int $id): RedirectResponse
+    public function remove(int $id): JsonResponse
     {
         /**
          * @var Client $item
          */
-        $item = $this->objectNoExist($this->clientRepository->find($id));
+        $item = $this->clientRepository->find($id);
+
+        if (!$item) {
+            return $this->itemNoExist();
+        }
 
         $this->clientService->remove($item);
 
-        return redirect()->back()
-            ->with('notification.success', __('notifications.success.removed'));
+        return $this->successRemoved();
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function archive(int $id): JsonResponse
+    {
+        /**
+         * @var Client $item
+         */
+        $item = $this->clientRepository->find($id);
+
+        if (!$item) {
+            return $this->itemNoExist();
+        }
+
+        $item->update(['is_archive' => $item->is_archive == 1 ? 0 : 1]);
+
+        return $this->successResponse();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Users;
 
+use App\Helpers\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -21,7 +22,13 @@ class UserRequest extends FormRequest
     {
         $rules = [];
         if ($this->isMethod('post')) {
-            $rules = [];
+            if ($this->get('role') == Role::$role['INSPECTOR']) {
+                $rules['password'] = 'required|string|min:8|confirmed';
+            }
+
+            $rules['first_name'] = 'required|string|min:3';
+            $rules['last_name'] = 'required|string|min:3';
+            $rules['email'] = 'required|email';
         }
 
         return $rules;
