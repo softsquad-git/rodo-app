@@ -7,6 +7,7 @@ use App\Models\Tasks\Task;
 use App\Models\Tasks\TaskAttachment;
 use App\Traits\UploadFileTrait;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -46,6 +47,7 @@ class TaskService
         DB::beginTransaction();
         try {
             $data['number'] = Str::random(4);
+            $data['creator_id'] = Auth::id();
             $task = Task::create($data);
             if (isset($data['attachments']) && count($data['attachments']) > 0) {
                 foreach ($data['attachments'] as $attachment) {

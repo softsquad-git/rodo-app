@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Inspector\Tasks;
 
+use App\Helpers\Role;
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\Tasks\TaskRequest;
 use App\Http\Resources\Tasks\TaskResource;
 use App\Models\Tasks\Task;
 use App\Repositories\Settings\StatusRepository;
 use App\Repositories\Tasks\TaskRepository;
+use App\Repositories\Users\UserRepository;
 use App\Services\Tasks\TaskService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,7 +25,8 @@ class TaskController extends ApiController
     public function __construct(
         private TaskRepository $taskRepository,
         private TaskService $taskService,
-        private StatusRepository $statusRepository
+        private StatusRepository $statusRepository,
+        private UserRepository $userRepository
     )
     {
     }
@@ -71,7 +74,10 @@ class TaskController extends ApiController
         return \view('inspector.tasks.form', [
             'title' => __('inspector.tasks.form.create.title'),
             'item' => new Task(),
-            'statuses' => $this->statusRepository->findAll(Task::$resourceType)
+            'statuses' => $this->statusRepository->findAll(Task::$resourceType),
+            'users' => $this->userRepository->findBy([
+                'role' => Role::$role['EMPLOYEE']
+            ], 'desc', 20, true)
         ]);
     }
 
@@ -97,7 +103,10 @@ class TaskController extends ApiController
         return \view('inspector.tasks.form', [
             'title' => __('inspector.tasks.form.create.title'),
             'item' => $item,
-            'statuses' => $this->statusRepository->findAll(Task::$resourceType)
+            'statuses' => $this->statusRepository->findAll(Task::$resourceType),
+            'users' => $this->userRepository->findBy([
+                'role' => Role::$role['EMPLOYEE']
+            ], 'desc', 20, true)
         ]);
     }
 

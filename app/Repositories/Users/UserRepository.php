@@ -4,6 +4,7 @@ namespace App\Repositories\Users;
 use App\Models\Users\User;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserRepository
 {
@@ -20,13 +21,15 @@ class UserRepository
      * @param array $filters
      * @param string $ordering
      * @param int $pagination
-     * @return LengthAwarePaginator
+     * @param bool $isAll
+     * @return LengthAwarePaginator|Collection|array
      */
     public function findBy(
         array $filters,
         string $ordering = 'DESC',
-        int $pagination = 20
-    ): LengthAwarePaginator
+        int $pagination = 20,
+        bool $isAll = false
+    ): LengthAwarePaginator|Collection|array
     {
         $data = User::orderBy('id', $ordering);
 
@@ -44,6 +47,10 @@ class UserRepository
 
         if (isset($filters['is_active']) && !empty($filters['is_active'])) {
             $data->where('is_active', $filters['is_active']);
+        }
+
+        if ($isAll === true) {
+            return $data->get();
         }
 
         return $data->paginate($pagination);

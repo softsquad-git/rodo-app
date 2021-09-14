@@ -120,7 +120,35 @@ export default {
             }).catch((error) => {})
         },
         remove(id) {
+            this.$swal.fire({
+                type: 'warning',
+                title: 'Jesteś pewien?',
+                text: 'Czy na pewno chcesz usunąć zadanie?',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Tak!',
+                cancelButtonText: 'Nie!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$axios.delete(`/inspector/api/tasks/remove/${id}`)
+                        .then((data) => {
+                            if (data.data.success === 1) {
+                                this.$swal.fire({
+                                    type: 'success',
+                                    title: data.data.message
+                                });
 
+                                this.loadData();
+                            } else {
+                                this.$swal.fire({
+                                    type: 'error',
+                                    title: data.data.message
+                                })
+                            }
+                        })
+                }
+            })
         },
         loadStatuses() {
             this.$axios.get(`/inspector/api/get-statuses?resource_type=task`)

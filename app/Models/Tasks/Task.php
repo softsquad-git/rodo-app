@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int status_id
  * @property User user
  * @property Status status
+ * @property int creator_id
+ * @property User creator
  * @method static create(array $data)
  * @method static find(int $id)
  * @method static orderBy(string $orderingColumn, string $orderingSort)
@@ -49,10 +51,12 @@ class Task extends Model
         'description',
         'deadline',
         'progress',
-        'status_id'
+        'status_id',
+        'creator_id'
     ];
 
     /**
+     * User to whom the task is assigned
      * @return BelongsTo
      */
     public function user(): BelongsTo
@@ -76,5 +80,14 @@ class Task extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(TaskAttachment::class, 'task_id');
+    }
+
+    /**
+     * User who created task
+     * @return BelongsTo
+     */
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 }
