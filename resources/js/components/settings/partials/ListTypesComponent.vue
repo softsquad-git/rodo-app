@@ -23,26 +23,13 @@
             </tbody>
         </table>
 
-        <div class="modal fade" id="createItem" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel">Dodaj typ klienta</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" v-model="data.name" aria-label="Nazwa" placeholder="Nazwa" class="form-control form-control-alt">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button @click="createType" type="button" class="btn btn-outline-primary btn-sm">Zapisz</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <b-modal id="createModal" title="Dodaj status" hide-header hide-footer>
+            <h5>Dodaj typ klienta</h5>
+            <label for="name" class="form-label">Nazwa</label>
+            <input type="text" v-model="data.name" class="form-control" id="name">
+
+            <button @click="createType" class="btn btn-sm btn-outline-primary mt-3">Zapisz</button>
+        </b-modal>
     </div>
 </template>
 
@@ -82,11 +69,7 @@ export default {
             this.$axios.post('/administration/api/settings/types/create', this.data)
                 .then((data) => {
                     if (data.data.success === 1) {
-                        const modal = new bootstrap.Modal(document.getElementById('createItem'), {
-                            keyboard: false
-                        });
-                        console.log(modal)
-                        modal.dispose();
+                        this.$bvModal.hide('createModal');
                         this.data.name = '';
                         this.$swal.fire(
                             'Typ klienta został dodany', '', 'success'

@@ -23,32 +23,18 @@
             </tbody>
         </table>
 
-        <div class="modal fade" id="createItem" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="createModalLabel">Dodaj status</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" v-model="data.name" aria-label="Nazwa" placeholder="Nazwa" class="form-control form-control-alt">
-                            </div>
-                            <div class="form-group">
-                                <select class="form-control form-control-alt" v-model="data.resource_type">
-                                    <option value="" selected>Tabela</option>
-                                    <option v-for="resource in resources" :value="resource.type">{{ resource.name }}</option>
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button @click="createStatus" type="button" class="btn btn-outline-primary btn-sm">Zapisz</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <b-modal id="createModal" title="Dodaj status" hide-header hide-footer>
+            <h5>Dodaj status</h5>
+            <label for="name" class="form-label">Nazwa</label>
+            <input type="text" v-model="data.name" class="form-control" id="name">
+
+            <label for="resource_type" class="form-label mt-3">Tabela</label>
+            <select id="resource_type" class="form-control" v-model="data.resource_type">
+                <option v-for="resource in resources" :value="resource.type">{{ resource.name }}</option>
+            </select>
+
+            <button @click="createStatus" class="btn btn-sm btn-outline-primary mt-3">Zapisz</button>
+        </b-modal>
     </div>
 </template>
 
@@ -75,6 +61,10 @@ export default {
                 {
                     type: 'inspector',
                     name: 'Inspektor'
+                },
+                {
+                    type: 'certificate_patter',
+                    name: 'Szablony certyfikatów'
                 }
             ]
         }
@@ -110,11 +100,7 @@ export default {
             this.$axios.post(this.url_status_create, this.data)
             .then((data) => {
                 if (data.data.success === 1) {
-                    const modal = new bootstrap.Modal(document.getElementById('createItem'), {
-                        keyboard: false
-                    });
-                    console.log(modal)
-                    modal.dispose();
+                    this.$bvModal.hide('createModal');
                     this.data.name = '';
                     this.$swal.fire(
                         'Status został dodany', '', 'success'

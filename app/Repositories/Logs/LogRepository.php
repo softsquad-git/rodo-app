@@ -34,6 +34,14 @@ class LogRepository
             $data->where('resource_type', $filters['resource_type']);
         }
 
+        if (isset($filters['from']) && !empty($filters['from'])) {
+            $data->where('created_at', '>=', $filters['from']);
+        }
+
+        if (isset($filters['to']) && !empty($filters['to'])) {
+            $data->where('created_at', '<=', $filters['to']);
+        }
+
         return $data->paginate($pagination);
     }
 }

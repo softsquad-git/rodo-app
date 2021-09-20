@@ -8,7 +8,18 @@
                 <div class="block-header block-header-default">
                     <div class="block-title"></div>
                     <div class="block-options">
-                        <button type="button" title="Pobierz plik" class="btn-block-option float-right w-auto">
+                        <form id="formDownload" method="get" action="{{ route('admin.logs.download') }}">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control form-control-sm form-control-alt" name="from" placeholder="Od">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="date" class="form-control form-control-sm form-control-alt" name="to" placeholder="Do">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-outline-primary mt-1">Pobierz</button>
+                        </form>
+                        <button id="toggleFormDownload" type="button" title="Pobierz plik" class="btn-block-option float-right w-auto">
                             <i class="si si-cloud-download"></i>
                         </button>
                     </div>
@@ -46,4 +57,12 @@
             @include('partials.no_data')
         @endif
     </div>
+@endsection
+@section('customJs')
+    <script>
+        let formDownload = $('#formDownload').hide();
+        $('#toggleFormDownload').click(function () {
+            formDownload.toggle('slow');
+        })
+    </script>
 @endsection

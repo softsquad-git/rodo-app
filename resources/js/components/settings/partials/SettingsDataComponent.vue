@@ -62,7 +62,7 @@ export default {
             this.$emit('remove')
         },
         create() {
-            this.$emit('create')
+            this.$bvModal.show('createModal');
         }
     }
 }

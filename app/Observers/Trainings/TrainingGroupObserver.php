@@ -8,6 +8,6 @@ class TrainingGroupObserver
 {
     public function deleted(TrainingGroup $trainingGroup)
     {
-
+        $trainingGroup->trainings()->detach();
     }
 }

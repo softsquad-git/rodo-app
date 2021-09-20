@@ -75,7 +75,7 @@ class ClientController extends ApiController
             'item' => new Client(),
             'title' => __('admin.clients.form.create.title'),
             'types' => $this->typeRepository->findBy(['resource_type' => Client::$resourceType]),
-            'statuses' => $this->statusRepository->findAll()
+            'statuses' => $this->statusRepository->findAll(Client::$resourceType)
         ]);
     }
 

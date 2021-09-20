@@ -17,6 +17,13 @@ Vue.component('users-list-component', require('./components/admin/users/UsersLis
 Vue.component('trainings-list-groups-component', require('./components/admin/trainings/groups/TrainingsListGroupsComponent.vue').default);
 Vue.component('roles-list-component', require('./components/admin/roles/RolesListComponent.vue').default);
 Vue.component('trainings-list-component', require('./components/admin/trainings/TrainingsListComponent.vue').default);
+Vue.component('admin-tests-list-component', require('./components/admin/trainings/tests/AdminTestsListComponent.vue').default);
+Vue.component('admin-test-questions-list-component', require('./components/admin/trainings/tests/questions/AdminTestQuestionsListComponent.vue').default);
+Vue.component('admin-test-question-form-component', require('./components/admin/trainings/tests/questions/AdminTestQuestionFormComponent.vue').default);
+Vue.component('certificates-patters-list-component', require('./components/admin/certificates/CertificatesPattersListComponent.vue').default);
+Vue.component('certificates-list-component', require('./components/admin/certificates/CertificatesListComponent.vue').default);
+Vue.component('invoices-list-component', require('./components/admin/invoices/InvoicesListComponent.vue').default);
+Vue.component('invoices-settings-list-component', require('./components/admin/invoices/InvoicesSettingsListComponent.vue').default);
 
 Vue.component('inspector-tasks-list-component', require('./components/inspector/tasks/TasksListComponent.vue').default);
 

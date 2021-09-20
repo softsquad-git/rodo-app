@@ -15,22 +15,22 @@
         <div class="block-content block-content-full">
             <div class="row mb-3">
                 <div class="col-md-1 col-12">
-                    <b-form-select v-model="filters.pagination" class="form-control" :options="paginationNumbers"
+                    <b-form-select v-model="filters.pagination" class="form-control form-control-sm form-control-alt" :options="paginationNumbers"
                                    size="sm"></b-form-select>
                 </div>
                 <div class="col-md-11 col-12">
                     <div class="row" v-if="isSearchBox">
                         <div class="col-md-1">
-                            <input type="number" v-model="filters.id" placeholder="ID" class="form-control">
+                            <input type="number" v-model="filters.id" placeholder="ID" class="form-control form-control-sm form-control-alt">
                         </div>
                         <div class="col-md-2">
-                            <input type="text" v-model="filters.number" placeholder="Numer" class="form-control">
+                            <input type="text" v-model="filters.number" placeholder="Numer" class="form-control form-control-sm form-control-alt">
                         </div>
                         <div class="col-md-3">
-                            <input type="text" v-model="filters.name" placeholder="Nazwa" class="form-control">
+                            <input type="text" v-model="filters.name" placeholder="Nazwa" class="form-control form-control-sm form-control-alt">
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" v-model="filters.status_id">
+                            <select class="form-control form-control-sm form-control-alt" v-model="filters.status_id">
                                 <option value="" selected>Status</option>
                                 <option v-for="status in statuses" :value="status.id">{{ status.name }}</option>
                             </select>

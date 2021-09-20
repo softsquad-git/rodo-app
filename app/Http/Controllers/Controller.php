@@ -39,4 +39,9 @@ class Controller extends BaseController
 
         return $ordering;
     }
+
+    protected function noItem(): RedirectResponse
+    {
+        return redirect()->back();
+    }
 }

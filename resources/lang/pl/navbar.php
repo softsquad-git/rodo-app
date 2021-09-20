@@ -56,13 +56,13 @@ return [
                 ],
                 'tests' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'admin.trainings.tests.index',
                     'title' => 'Testy',
                     'icon' => 'si si-speedometer'
                 ],
                 'certificates' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'admin.certificates.index',
                     'title' => 'Certyfikaty',
                     'icon' => 'si si-trophy'
                 ]
@@ -76,13 +76,13 @@ return [
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'admin.invoices.index',
                     'title' => 'Lista',
                     'icon' => 'si si-list'
                 ],
                 'settings' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'admin.invoices.settings.index',
                     'title' => 'Ustawienia',
                     'icon' => 'si si-settings'
                 ]

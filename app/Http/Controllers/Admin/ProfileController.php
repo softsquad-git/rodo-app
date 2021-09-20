@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\SettingAvatarRequest;
+use App\Http\Requests\Settings\SettingBasicDataRequest;
+use App\Http\Requests\Settings\SettingPasswordRequest;
 use App\Models\Users\User;
 use App\Repositories\Users\UserRepository;
 use App\Services\Users\UserService;
@@ -53,6 +55,38 @@ class ProfileController extends Controller
 
         $data = $request->only(['avatar']);
         $this->userService->updateAvatar($data, $user);
+
+        return redirect()->back()
+            ->with('notification.success', __('notifications.success.updated'));
+    }
+
+    public function updateBasicData(SettingBasicDataRequest $request): RedirectResponse
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->objectNoExist($this->userRepository->find(Auth::id()));
+        $this->userService->updateBasicData($request->only('first_name', 'last_name', 'email'), $user);
+
+        return redirect()->back()
+            ->with('notification.success', __('notifications.success.updated'));
+    }
+
+    /**
+     * @param SettingPasswordRequest $request
+     * @return RedirectResponse
+     */
+    public function updatePassword(SettingPasswordRequest $request): RedirectResponse
+    {
+        /**
+         * @var User $user
+         */
+        $user = $this->objectNoExist($this->userRepository->find(Auth::id()));
+
+        $is = $this->userService->updatePassword($request->only('old_password', 'new_password'), $user);
+        if (!$is) {
+            return redirect()->back()->with('notification.error', 'Obecne hasło jest nieprawidłowe');
+        }
 
         return redirect()->back()
             ->with('notification.success', __('notifications.success.updated'));

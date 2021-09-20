@@ -6,7 +6,12 @@ return [
         'title' => 'System',
         'avatar' => 'Zdjęcie profilowe',
         'change_avatar' => 'Zmień zdjęcie profilowe',
-        'basic_data' => 'Dane podstawowe'
+        'basic_data' => 'Dane podstawowe',
+        'first_name' => 'Imię',
+        'last_name' => 'Nazwisko',
+        'old_password' => 'Obecne hasło',
+        'new_password' => 'Nowe hasło',
+        'email' => 'E-mail'
     ],
     'logs' => [
         'title' => 'Rejestr zdarzeń',
@@ -115,6 +120,58 @@ return [
                 ],
                 'name' => 'Nazwa'
             ]
+        ],
+        'tests' => [
+            'title' => 'Testy',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj test'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj test'
+                ],
+                'name' => 'Nazwa kursu',
+                'group' => 'Grupa szkoleń',
+                'answers' => 'Pytania',
+                'pass_threshold' => 'Próg zaliczenia (%)'
+            ],
+            'questions' => [
+                'title' => 'Pytania',
+                'form' => [
+                    'create' => [
+                        'title' => 'Dodaj pytanie'
+                    ],
+                    'edit' => [
+                        'title' => 'Edytuj pytanie'
+                    ]
+                ]
+            ]
+        ],
+        'certificates' => [
+            'title' => 'Certyfikaty',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj certyfika'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj certyfikat'
+                ]
+            ],
+            'patters' => [
+                'title' => 'Szablony certyfikatów',
+                'form' => [
+                    'create' => [
+                        'title' => 'Dodaj szablon'
+                    ],
+                    'edit' => [
+                        'title' => 'Edytuj szablon'
+                    ],
+                    'name' => 'Nazwa',
+                    'status' => 'Status',
+                    'description' => 'Opis',
+                    'tests' => 'Przypisane testy',
+                ]
+            ]
         ]
     ],
     'roles' => [
@@ -127,6 +184,16 @@ return [
                 'title' => 'Edytuj rolę'
             ],
             'name' => 'Nazwa'
+        ]
+    ],
+    'invoice' => [
+        'title' => 'Faktury',
+        'settings' => [
+            'title' => 'Ustawienia',
+            'names' => [
+                'wfirma_login' => 'wFirma login',
+                'wfirma_pass' => 'wFirma hasło'
+            ]
         ]
     ]
 ];

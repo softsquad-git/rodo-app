@@ -39,4 +39,26 @@ class ApiController extends Controller
             'message' => __('admin.notifications.removed')
         ], ResponseAlias::HTTP_OK);
     }
+
+    /**
+     * @return JsonResponse
+     */
+    public function createdResponse(): JsonResponse
+    {
+        return response()->json([
+            'success' => 1,
+            'message' => __('admin.notifications.created')
+        ], ResponseAlias::HTTP_CREATED);
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function updatedResponse(): JsonResponse
+    {
+        return response()->json([
+            'success' => 1,
+            'message' => __('admin.notifications.updated')
+        ], ResponseAlias::HTTP_OK);
+    }
 }

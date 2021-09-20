@@ -85,6 +85,34 @@ class UserService
     {
         return $user->delete();
     }
+
+    /**
+     * @param array $data
+     * @param User $user
+     * @return User|bool
+     */
+    public function updatePassword(array $data, User $user): User|bool
+    {
+        if (Hash::check($data['old_password'], $user->password)) {
+            $user->update(['password' => Hash::make($data['new_password'])]);
+
+            return $user;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param array $data
+     * @param User $user
+     * @return User
+     */
+    public function updateBasicData(array $data, User $user): User
+    {
+        $user->update($data);
+
+        return $user;
+    }
 }
 
 /**TODO
