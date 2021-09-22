@@ -23,7 +23,7 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => 'admin@example.org',
             'password' => Hash::make('start123'),
             'avatar_img' => '',
             'role' => Role::$role['ADMIN'],
