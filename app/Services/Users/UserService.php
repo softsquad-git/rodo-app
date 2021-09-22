@@ -49,6 +49,8 @@ class UserService
             if ($data['role'] == Role::$role['EMPLOYEE']) {
                 $generatePassword = Str::random(8);
                 $data['password'] = Hash::make($generatePassword);
+            } else {
+                $data['password'] = Hash::make($data['password']);
             }
 
             /**
@@ -56,16 +58,16 @@ class UserService
              */
             $user = User::create($data);
 
-            $this->mail
-                ->setTo($user->email)
-                ->setSubject(__('_mail.title.user_account_created'))
-                ->setFrom(config('mail.from'))
-                ->setTemplate('user.create_account.'.$user->role)
-                ->setBody([
-                    'generate_password' => $generatePassword,
-                    'user' => $user
-                ])
-                ->send();
+//            $this->mail
+//                ->setTo($user->email)
+//                ->setSubject(__('_mail.title.user_account_created'))
+//                ->setFrom(config('mail.from'))
+//                ->setTemplate('user.create_account.'.$user->role)
+//                ->setBody([
+//                    'generate_password' => $generatePassword,
+//                    'user' => $user
+//                ])
+//                ->send();
 
             DB::commit();
             return $user;
