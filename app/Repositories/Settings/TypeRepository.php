@@ -39,4 +39,13 @@ class TypeRepository
     {
         return Type::where($filters)->first();
     }
+
+    /**
+     * @param string $resourceType
+     * @return array|Collection
+     */
+    public function findAll(string $resourceType): array|Collection
+    {
+        return Type::where(['resource_type' => $resourceType])->get();
+    }
 }

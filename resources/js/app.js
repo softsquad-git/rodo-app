@@ -26,6 +26,15 @@ Vue.component('invoices-list-component', require('./components/admin/invoices/In
 Vue.component('invoices-settings-list-component', require('./components/admin/invoices/InvoicesSettingsListComponent.vue').default);
 
 Vue.component('inspector-tasks-list-component', require('./components/inspector/tasks/TasksListComponent.vue').default);
+Vue.component('inspector-departments-list-component', require('./components/inspector/departments/DepartmentsListComponent.vue').default);
+Vue.component('inspector-employees-list-component', require('./components/inspector/employees/EmployeesListComponent.vue').default);
+Vue.component('inspector-employees-form-component', require('./components/inspector/employees/EmployeesFormComponent.vue').default);
+Vue.component('inspector-newsletter-list-component', require('./components/inspector/newsletter/NewsletterListComponent.vue').default);
+Vue.component('inspector-documents-list-component', require('./components/inspector/documents/DocumentsListComponent.vue').default);
+Vue.component('inspector-documents-form-component', require('./components/inspector/documents/DocumentFormComponent.vue').default);
+Vue.component('inspector-applications-conclusions-list-component', require('./components/inspector/applications/ApplicationsConclusionsListComponent.vue').default);
+Vue.component('inspector-applications-issues-list-component', require('./components/inspector/applications/issues/ApplicationIssuesListComponent.vue').default);
+Vue.component('inspector-applications-issues-form-component', require('./components/inspector/applications/issues/ApplicationIssuesFormComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

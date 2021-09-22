@@ -51,4 +51,9 @@ class ClientRepository
     {
         return Client::where($filters)->first();
     }
+
+    public function findAll()
+    {
+        return Client::all();
+    }
 }

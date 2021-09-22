@@ -3150,7 +3150,7 @@ var FullCalendar = (function (exports) {
             else if (sourceInput != null) { // an ID. accepts a number too
                 var sourceApi = this.getEventSourceById(sourceInput); // TODO: use an internal function
                 if (!sourceApi) {
-                    console.warn("Could not find an event source with ID \"" + sourceInput + "\""); // TODO: test
+                    console.warn("Could not find an event source with ID \"" + sourceInput + "\""); // TODO: tests
                     return null;
                 }
                 eventSource = sourceApi.internalEventSource;
@@ -6593,7 +6593,7 @@ var FullCalendar = (function (exports) {
         var endMarker = framingRange.end;
         var instanceStarts = [];
         while (dayMarker < endMarker) {
-            var instanceStart 
+            var instanceStart
             // if everyday, or this particular day-of-week
             = void 0;
             // if everyday, or this particular day-of-week
@@ -10991,7 +10991,7 @@ var FullCalendar = (function (exports) {
                     disableCursor();
                 }
                 if (!isFinal) {
-                    if (initialContext === receivingContext && // TODO: write test for this
+                    if (initialContext === receivingContext && // TODO: write tests for this
                         isHitsEqual(initialHit, hit)) {
                         mutation = null;
                     }
@@ -11172,7 +11172,7 @@ var FullCalendar = (function (exports) {
             this.validMutation = null;
             this.mutatedRelevantEvents = null;
         };
-        // TODO: test this in IE11
+        // TODO: tests this in IE11
         // QUESTION: why do we need it on the resizable???
         EventDragging.SELECTOR = '.fc-event-draggable, .fc-event-resizable';
         return EventDragging;
@@ -11751,7 +11751,7 @@ var FullCalendar = (function (exports) {
         function ThirdPartyDraggable(containerOrSettings, settings) {
             var containerEl = document;
             if (
-            // wish we could just test instanceof EventTarget, but doesn't work in IE11
+            // wish we could just tests instanceof EventTarget, but doesn't work in IE11
             containerOrSettings === document ||
                 containerOrSettings instanceof Element) {
                 containerEl = containerOrSettings;
@@ -13514,7 +13514,7 @@ var FullCalendar = (function (exports) {
             if (!slatCoords) {
                 return null;
             }
-            return segs.map(function (seg, i) { return (createElement(NowIndicatorRoot, { isAxis: false, date: date, 
+            return segs.map(function (seg, i) { return (createElement(NowIndicatorRoot, { isAxis: false, date: date,
                 // key doesn't matter. will only ever be one
                 key: i }, function (rootElRef, classNames, innerElRef, innerContent) { return (createElement("div", { ref: rootElRef, className: ['fc-timegrid-now-indicator-line'].concat(classNames).join(' '), style: { top: slatCoords.computeDateTop(seg.start, date) } }, innerContent)); })); });
         };

@@ -3,7 +3,12 @@
         <div class="header">
             <b-dropdown text="Wybierz" size="sm" variant="outline-primary">
                 <b-dropdown-item @click="selectDropdown('status')">Statusy</b-dropdown-item>
-                <b-dropdown-item @click="selectDropdown('types_clients')">Typy klienta</b-dropdown-item>
+                <b-dropdown-item @click="selectDropdown('types_clients')">Typ klienta</b-dropdown-item>
+                <b-dropdown-item @click="selectDropdown('types_contracts')">Typ umowy</b-dropdown-item>
+                <b-dropdown-item @click="selectDropdown('types_attachments')">Rodzaj załącznika</b-dropdown-item>
+                <b-dropdown-item @click="selectDropdown('document')">Rodzaj dokumentu</b-dropdown-item>
+                <b-dropdown-item @click="selectDropdown('conclusion')">Rodzaje wniosków</b-dropdown-item>
+                <b-dropdown-item @click="selectDropdown('issue')">Rodzaje spraw</b-dropdown-item>
             </b-dropdown>
             <button v-if="isShowTrash" @click="remove" type="button" class="btn btn-sm btn-alt-secondary" style="float: right" data-bs-original-title="Usuń">
                 <i class="fa fa-fw fa-trash"></i>
@@ -28,6 +33,11 @@
 import Status from "./Status";
 import ListTypesComponent from "./ListTypesComponent";
 import ListTypesAccountComponent from "./ListTypesAccountComponent";
+import ListTypesContractComponent from "./ListTypesContractComponent";
+import ListTypesAttachmentsComponent from "./ListTypesAttachmentsComponent";
+import ListTypesDocumentComponent from "./ListTypesDocumentComponent";
+import ListTypesConclusionComponent from "./ListTypesConclusionComponent";
+import ListTypesIssueComponent from "./ListTypesIssueComponent";
 
 export default {
     name: "SettingsDataComponent",
@@ -56,6 +66,21 @@ export default {
             }
             if(type === 'types_inspector') {
                 return this.dataCurrentComponent = ListTypesAccountComponent
+            }
+            if (type === 'types_contracts') {
+                return this.dataCurrentComponent = ListTypesContractComponent
+            }
+            if (type === 'types_attachments') {
+                return this.dataCurrentComponent = ListTypesAttachmentsComponent
+            }
+            if (type === 'document') {
+                return this.dataCurrentComponent = ListTypesDocumentComponent;
+            }
+            if (type === 'conclusion') {
+                return this.dataCurrentComponent = ListTypesConclusionComponent;
+            }
+            if (type === 'issue') {
+                return this.dataCurrentComponent = ListTypesIssueComponent
             }
         },
         remove() {

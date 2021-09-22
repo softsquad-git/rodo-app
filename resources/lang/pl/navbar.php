@@ -41,6 +41,8 @@ return [
             'type' => $types['sub'],
             'title' => 'Szkolenia',
             'icon' => 'si si-size-actual',
+            'name' => 'trainings',
+            'name_sub' => 'certificates',
             'items' => [
                 'list' => [
                     'type' => $types['single'],
@@ -73,6 +75,8 @@ return [
             'title' => 'Faktury',
             'type' => $types['sub'],
             'icon' => 'si si-printer',
+            'name' => 'invoices',
+            'name_sub' => 'invoices',
             'items' => [
                 'list' => [
                     'type' => $types['single'],
@@ -118,18 +122,20 @@ return [
             'type' => $types['sub'],
             'title' => 'Pracownicy',
             'icon' => 'si si-people',
+            'name' => 'departments',
+            'name_sub' => 'employees',
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.employees.index',
                     'title' => 'Lista',
-                    'icon' => 'si si-list'
+                    'icon' => 'si si-list',
                 ],
                 'departments' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.departments.index',
                     'title' => 'Działy',
-                    'icon' => 'fa fa-boxes'
+                    'icon' => 'fa fa-boxes',
                 ]
             ]
         ],
@@ -137,10 +143,12 @@ return [
             'type' => $types['sub'],
             'title' => 'Wiadomości',
             'icon' => 'fa fa-envelope-open-text',
+            'name' => 'newsletter',
+            'name_sub' => 'newsletter',
             'items' => [
                 'newsletter' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.newsletter.index',
                     'title' => 'Newsletter',
                     'icon' => 'fa fa-newspaper'
                 ],
@@ -175,10 +183,12 @@ return [
             'type' => $types['sub'],
             'title' => 'Dokumenty',
             'icon' => 'fa fa-university',
+            'name' => 'documents',
+            'name_sub' => 'documents',
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.documents.index',
                     'title' => 'Lista',
                     'icon' => 'si si-list'
                 ],
@@ -188,16 +198,18 @@ return [
             'type' => $types['sub'],
             'title' => 'Zgłoszenia',
             'icon' => 'fa fa-eject',
+            'name' => 'applications',
+            'name_sub' => 'applications',
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.applications.conclusions.index',
                     'title' => 'Wnioski',
                     'icon' => 'si si-list'
                 ],
                 'issues' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.applications.issues.index',
                     'title' => 'Sprawy',
                     'icon' => 'si si-list'
                 ],
@@ -219,7 +231,8 @@ return [
             'type' => $types['single'],
             'route' => 'inspector.tasks.index',
             'title' => 'Zadania',
-            'icon' => 'fa fa-tasks'
+            'icon' => 'fa fa-tasks',
+            'name' => 'tasks'
         ],
         'data_sets' => [
             'type' => $types['single'],

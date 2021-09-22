@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @package App\Models
+ * @property int id
  * @property string first_name
  * @property string last_name
  * @property string name

@@ -65,6 +65,22 @@ export default {
                 {
                     type: 'certificate_patter',
                     name: 'Szablony certyfikatów'
+                },
+                {
+                    type: 'post_newsletter',
+                    name: 'Posty newsletter'
+                },
+                {
+                    type: 'document',
+                    name: 'Statusy dokumentów'
+                },
+                {
+                    type: 'conclusion',
+                    name: 'Statusy wniosków'
+                },
+                {
+                    type: 'issue',
+                    name: 'Statusy spraw'
                 }
             ]
         }

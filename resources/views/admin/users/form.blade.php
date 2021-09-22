@@ -17,17 +17,7 @@
                 </form>
 
                 @if(request()->input('role') && !empty(request()->input('role')))
-                    {{-- FORM ROLE --}}
-                    <form method="POST" action="{{ $item->id ? route('admin.users.update', ['id' => $item->id]) : route('admin.users.create') }}">
-                        @csrf
-                        <input type="hidden" value="{{ request()->input('role') }}" name="role">
-                        @include('admin.users.partials.'.request()->input('role'))
-
-                        <button type="submit" class="btn btn-outline-primary btn-sm">
-                            {{ __('trans.save') }}
-                        </button>
-                        <a href="{{ route('admin.users.index') }}" class="btn btn-outline-danger btn-sm">{{ __('trans.cancel') }}</a>
-                    </form>
+                    @include('admin.users.partials.'.request()->input('role'))
                 @endif
             </div>
         </div>
