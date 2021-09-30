@@ -4,11 +4,16 @@ window.Vue = require('vue').default;
 import Vue from 'vue';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import { BootstrapVue } from 'bootstrap-vue'
+import {BootstrapVue} from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 Vue.use(BootstrapVue)
 Vue.use(VueSweetalert2);
 Vue.prototype.$axios = window.axios;
+
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+
+Vue.use(CKEditor);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('settings-component', require('./components/settings/SettingsComponent.vue').default);
@@ -35,6 +40,17 @@ Vue.component('inspector-documents-form-component', require('./components/inspec
 Vue.component('inspector-applications-conclusions-list-component', require('./components/inspector/applications/ApplicationsConclusionsListComponent.vue').default);
 Vue.component('inspector-applications-issues-list-component', require('./components/inspector/applications/issues/ApplicationIssuesListComponent.vue').default);
 Vue.component('inspector-applications-issues-form-component', require('./components/inspector/applications/issues/ApplicationIssuesFormComponent.vue').default);
+Vue.component('inspector-applications-incidents-list-component', require('./components/inspector/applications/incidents/ApplicationIncidentsListComponent.vue').default);
+Vue.component('inspector-applications-incidents-form-component', require('./components/inspector/applications/incidents/ApplicationIncidentsFormComponent.vue').default);
+Vue.component('inspector-meetings-list-component', require('./components/inspector/meetings/MeetingListComponent.vue').default);
+Vue.component('inspector-meetings-form-component', require('./components/inspector/meetings/MeetingFormComponent.vue').default);
+Vue.component('inspector-datasets-form-component', require('./components/inspector/datasets/DatasetFormComponent.vue').default);
+Vue.component('inspector-datasets-list-component', require('./components/inspector/datasets/DatasetsListComponent.vue').default);
+Vue.component('inspector-risk-analysis-security-list-component', require('./components/inspector/risk_analysis/SecurityListComponent.vue').default);
+Vue.component('inspector-assets-system-it-list-component', require('./components/inspector/assets/SystemItListComponent.vue').default);
+Vue.component('inspector-rcp-law-basic-list-component', require('./components/inspector/rcp/LawBasicListComponent.vue').default);
+Vue.component('inspector-rcp-activity-list-component', require('./components/inspector/rcp/RCPActivityListComponent.vue').default);
+Vue.component('inspector-rcp-data-retention-list-component', require('./components/inspector/rcp/RCPDataRetentionListComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

@@ -215,7 +215,7 @@ return [
                 ],
                 'incidents' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.applications.incidents.index',
                     'title' => 'Incydenty',
                     'icon' => 'si si-list'
                 ]
@@ -223,9 +223,10 @@ return [
         ],
         'meeting' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'inspector.meetings.index',
             'title' => 'Spotkanie',
-            'icon' => 'fa fa-handshake'
+            'icon' => 'fa fa-handshake',
+            'name' => 'meetings'
         ],
         'tasks' => [
             'type' => $types['single'],
@@ -236,9 +237,10 @@ return [
         ],
         'data_sets' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'inspector.datasets.index',
             'title' => 'Zbiory danych',
-            'icon' => 'fa fa-database'
+            'icon' => 'fa fa-database',
+            'name' => 'datasets'
         ],
         'areas_processing' => [
             'type' => $types['single'],
@@ -250,6 +252,8 @@ return [
             'type' => $types['sub'],
             'title' => 'Aktywa',
             'icon' => 'si si-size-actual',
+            'name' => 'assets',
+            'name_sub' => 'assets',
             'items' => [
                 'resources' => [
                     'type' => $types['single'],
@@ -259,7 +263,7 @@ return [
                 ],
                 'it' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.assets.system_it.index',
                     'title' => 'System IT',
                     'icon' => 'si si-list'
                 ],
@@ -269,10 +273,12 @@ return [
             'type' => $types['sub'],
             'title' => 'Analiza ryzyka',
             'icon' => 'fa fa-project-diagram',
+            'name' => 'risk_analysis',
+            'name_sub' => 'risk-analysis',
             'items' => [
                 'security' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.risk_analysis.security.index',
                     'title' => 'Zabezpieczenia',
                     'icon' => 'fa fa-shield-alt'
                 ],
@@ -294,22 +300,24 @@ return [
             'type' => $types['sub'],
             'title' => 'RCP',
             'icon' => 'fa fa-qrcode',
+            'name' => 'rcp',
+            'name_sub' => 'rcp',
             'items' => [
                 'activities' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.rcp.activity.index',
                     'title' => 'Czynności',
                     'icon' => 'si si-list'
                 ],
                 'law_basics' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.rcp.law_basic.index',
                     'title' => 'Podstawy prawne',
                     'icon' => 'si si-list'
                 ],
                 'data_retention' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.rcp.data_retention.index',
                     'title' => 'Retencje danych',
                     'icon' => 'si si-list'
                 ],
@@ -319,6 +327,90 @@ return [
                     'title' => 'Rejestr',
                     'icon' => 'si si-list'
                 ],
+            ]
+        ],
+    ],
+    'employee' => [
+        'dashboard' => [
+            'type' => $types['single'],
+            'route' => '',
+            'title' => 'Pulpit',
+            'icon' => 'si si-speedometer',
+            'name' => 'dashboard'
+        ],
+        'profile' => [
+            'type' => $types['single'],
+            'route' => '',
+            'title' => 'Profil',
+            'icon' => 'si si-user',
+            'name' => 'profile'
+        ],
+        'permissions' => [
+            'type' => $types['single'],
+            'route' => '',
+            'title' => 'Uprawnienia',
+            'icon' => '',
+            'name' => 'permissions'
+        ],
+        'tutorials' => [
+            'type' => $types['sub'],
+            'title' => 'Szkolenia',
+            'icon' => 'si si-size-actual',
+            'name' => 'trainings',
+            'name_sub' => 'trainings',
+            'items' => [
+                'list' => [
+                    'type' => $types['single'],
+                    'route' => '',
+                    'title' => 'Wykaz',
+                    'icon' => 'si si-list'
+                ],
+                'tests' => [
+                    'type' => $types['single'],
+                    'route' => '',
+                    'title' => 'Testy',
+                    'icon' => 'si si-speedometer'
+                ],
+                'certificates' => [
+                    'type' => $types['single'],
+                    'route' => '',
+                    'title' => 'Certyfikaty',
+                    'icon' => 'si si-trophy'
+                ]
+            ]
+        ],
+        'docs' => [
+            'type' => $types['single'],
+            'title' => 'Dokumenty',
+            'route' => '',
+            'icon' => 'fa fa-university',
+            'name' => 'documents'
+        ],
+        'applications' => [
+            'type' => $types['sub'],
+            'title' => 'Zgłoszenia',
+            'icon' => 'fa fa-eject',
+            'name' => 'applications',
+            'name_sub' => 'applications',
+            'items' => [
+                'list' => [
+                    'type' => $types['single'],
+                    'route' => '',
+                    'title' => 'Wnioski',
+                    'icon' => 'si si-list'
+                ],
+                'issues' => [
+                    'type' => $types['single'],
+                    'route' => '',
+                    'title' => 'Sprawy',
+                    'icon' => 'si si-list'
+                ],
+                'incidents' => [
+                    'type' => $types['single'],
+                    'route' => '',
+                    'title' => 'Incydenty',
+                    'icon' => 'si si-list'
+                ]
             ]
         ],
     ]

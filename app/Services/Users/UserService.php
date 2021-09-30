@@ -79,7 +79,7 @@ class UserService
 
     public function update(array $data, User $user): User
     {
-
+        return $user;
     }
 
 

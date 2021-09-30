@@ -43,7 +43,18 @@
             </div>
             <div class="col-md-3 col-12">
                 <label for="departments" class="form-label">Działy</label>
-                <multiselect :multiple="true" v-model="data.department_ids" :options="departments" placeholder="Wybierz działy" label="name" track-by="id"></multiselect>
+                <multiselect
+                    v-model="data.department_ids"
+                    :options="departments"
+                    :multiple="true"
+                    :close-on-select="false"
+                    :clear-on-select="false"
+                    :preserve-search="true"
+                    label="name"
+                    track-by="id"
+                    :preselect-first="true">
+
+                </multiselect>
             </div>
             <div class="col-md-3 col-12">
                 <label for="type_contract" class="form-label">Rodzaj umowy</label>
@@ -129,14 +140,15 @@ export default {
     },
     props: {
         type: '',
-        save_url: ''
+        save_url: '',
+        redirect_url: ''
     },
     methods: {
         save() {
             this.$axios.post(this.save_url, this.data)
             .then((data) => {
                 if (data.data.success === 1) {
-
+                    return window.location.href = this.redirect_url;
                 }
             }).catch((error) => {
                 //

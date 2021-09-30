@@ -38,3 +38,4 @@
     width: 150px;
 }
 .multiselect__tags {min-height: 37px!important;}
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {min-height: 250px!important;}

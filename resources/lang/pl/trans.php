@@ -19,5 +19,12 @@ return [
         \App\Helpers\Role::$role['INSPECTOR'] => 'Inspektor'
     ],
     'select' => 'Wybierz',
-    'cancel' => 'Anuluj'
+    'cancel' => 'Anuluj',
+    'author_types' => [
+        'employee' => 'Pracownik',
+        'subcontractor' => 'Podwykonawca',
+        'media' => 'Media',
+        'business_partner' => 'Partner biznesoowy',
+        'third_party' => 'Osoba trzecia'
+    ]
 ];

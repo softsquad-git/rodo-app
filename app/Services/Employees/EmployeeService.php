@@ -3,6 +3,7 @@
 namespace App\Services\Employees;
 
 use App\Helpers\Role;
+use App\Helpers\Select;
 use App\Models\Employees\Employee;
 use App\Models\Users\User;
 use App\Traits\UploadFileTrait;
@@ -51,7 +52,7 @@ class EmployeeService
              * @var Employee $employee
              */
             $employee = Employee::create($data);
-            $employee->departments()->sync($data['department_ids']);
+            $employee->departments()->sync(Select::getIdsFromArray($data['department_ids']));
 
             DB::commit();
             return $employee;

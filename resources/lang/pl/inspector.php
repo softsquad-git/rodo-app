@@ -87,6 +87,133 @@ return [
                 'employee_accepted' => 'Osoba której akceptacja jest wymagana',
                 'file' => 'Załącznik'
             ]
+        ],
+        'issues' => [
+            'title' => 'Sprawy',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj sprawę'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj sprawę'
+                ]
+            ]
+        ],
+        'incidents' => [
+            'title' => 'Incydenty',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj incydent'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj incident'
+                ]
+            ]
+        ]
+    ],
+    'meetings' => [
+        'title' => 'Spotkania',
+        'form' => [
+            'create' => [
+                'title' => 'Utwórz spotkanie'
+            ],
+            'edit' => [
+                'title' => 'Edytuj spotkanie'
+            ]
+        ]
+    ],
+    'datasets' => [
+        'title'  => 'Zbiory danych',
+        'form' => [
+            'create' => [
+                'title' => 'Dodaj zbiór'
+            ],
+            'edit' => [
+                'title' => 'Edytuj zbiór'
+            ]
+        ]
+    ],
+    'assets' => [
+        'system_it' => [
+            'title' => 'System IT',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj system'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj system'
+                ],
+                'name' => 'Nazwa',
+                'owner' => 'Właściciel',
+                'description' => 'Opis',
+                'type' => 'Rodzaj',
+                'status' => 'Status'
+            ]
+        ]
+    ],
+    'risk_analysis' => [
+        'security' => [
+            'title' => 'Zabezpieczenia',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj zabezpieczenie'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj zabezpieczenie'
+                ],
+                'name' => 'Nazwa',
+                'status' => 'Status',
+                'type' => 'Rodzaj',
+                'description' => 'Opis'
+            ]
+        ]
+    ],
+    'rcp' => [
+        'law_basic' => [
+            'title' => 'Podstawy prawne',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj'
+                ],
+                'name' => 'Nazwa',
+                'status' => 'Status',
+                'description' => 'Opis'
+            ]
+        ],
+        'activity' => [
+            'title' => 'Czynności',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj'
+                ],
+                'edit' => [
+                    'Edytuj'
+                ],
+                'name' => 'Nazwa',
+                'related_collections' => 'Powiązane zbiory',
+                'basic_processing' => 'Podstawy przetwarzania',
+                'status' => 'Status'
+            ]
+        ],
+        'data_retention' => [
+            'title' => 'Retencje danych',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj'
+                ],
+                'name' => 'Nazwa',
+                'status' => 'Status',
+                'count' => 'Ilość',
+                'unit_day' => 'Dzień',
+                'unit_month' => 'Miesiąc',
+                'unit_year' => 'Rok',
+            ]
         ]
     ]
 ];

@@ -81,6 +81,10 @@ export default {
                 {
                     type: 'issue',
                     name: 'Statusy spraw'
+                },
+                {
+                    type: 'incident',
+                    name: 'Statusy incydentów'
                 }
             ]
         }
