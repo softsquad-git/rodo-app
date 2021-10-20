@@ -18,7 +18,7 @@ class CreateSecurityTable extends Migration
             $table->string('number');
             $table->string('name');
             $table->longText('description');
-            $table->unsignedInteger('type_id')->index();
+            $table->string('type');
             $table->unsignedInteger('status_id')->index();
             $table->timestamps();
         });

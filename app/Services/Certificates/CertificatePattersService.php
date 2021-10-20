@@ -3,12 +3,14 @@
 namespace App\Services\Certificates;
 
 use App\Models\Certificates\CertificatePattern;
+use App\Traits\GenerateNumber;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class CertificatePattersService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param CertificatePattern|null $certificatePattern
@@ -23,7 +25,7 @@ class CertificatePattersService
 
         DB::beginTransaction();
         try {
-            $data['number'] = Str::random(3);
+            $data['number'] = $this->generateRandomNumber();
             /**
              * @var CertificatePattern $certificatePattern
              */

@@ -18,7 +18,7 @@ class SecurityResource extends JsonResource
             'number' => $this->number,
             'name' => $this->name,
             'description' => $this->description,
-            'type' => $this->type,
+            'type' => $this->getType(),
             'status' => $this->status
         ];
     }

@@ -1,30 +1,16 @@
 <aside id="side-overlay">
-    <!-- Side Header -->
     <div class="content-header border-bottom">
-        <!-- User Avatar -->
         <a class="img-link me-1" href="javascript:void(0)">
             <img class="img-avatar img-avatar32" src="{{ \Illuminate\Support\Facades\Auth::user()->avatar }}" alt="">
         </a>
-        <!-- END User Avatar -->
-
-        <!-- User Info -->
         <div class="ms-2">
             <a class="text-dark fw-semibold fs-sm" href="javascript:void(0)">John Smith</a>
         </div>
-        <!-- END User Info -->
-
-        <!-- Close Side Overlay -->
-        <!-- Layout API, functionality initialized in Template._uiApiLayout() -->
         <a class="ms-auto btn btn-sm btn-alt-danger" href="javascript:void(0)" data-toggle="layout" data-action="side_overlay_close">
             <i class="fa fa-fw fa-times"></i>
         </a>
-        <!-- END Close Side Overlay -->
     </div>
-    <!-- END Side Header -->
-
-    <!-- Side Content -->
     <div class="content-side">
-        <!-- Side Overlay Tabs -->
         <div class="block block-transparent pull-x pull-t">
             <ul class="nav nav-tabs nav-tabs-block nav-justified" role="tablist">
                 <li class="nav-item">
@@ -39,9 +25,7 @@
                 </li>
             </ul>
             <div class="block-content tab-content overflow-hidden">
-                <!-- Overview Tab -->
                 <div class="tab-pane pull-x fade fade-left show active" id="so-overview" role="tabpanel" aria-labelledby="so-overview-tab">
-                    <!-- Activity -->
                     <div class="block block-transparent">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">Recent Activity</h3>
@@ -53,7 +37,6 @@
                             </div>
                         </div>
                         <div class="block-content">
-                            <!-- Activity List -->
                             <ul class="nav-items mb-0">
                                 <li>
                                     <a class="text-dark d-flex py-2" href="javascript:void(0)">
@@ -92,12 +75,8 @@
                                     </a>
                                 </li>
                             </ul>
-                            <!-- END Activity List -->
                         </div>
                     </div>
-                    <!-- END Activity -->
-
-                    <!-- Online Friends -->
                     <div class="block block-transparent">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">Online Friends</h3>
@@ -109,7 +88,6 @@
                             </div>
                         </div>
                         <div class="block-content">
-                            <!-- Users Navigation -->
                             <ul class="nav-items mb-0">
                                 <li>
                                     <a class="d-flex py-2" href="javascript:void(0)">
@@ -172,12 +150,8 @@
                                     </a>
                                 </li>
                             </ul>
-                            <!-- END Users Navigation -->
                         </div>
                     </div>
-                    <!-- END Online Friends -->
-
-                    <!-- Quick Settings -->
                     <div class="block block-transparent mb-0">
                         <div class="block-header block-header-default">
                             <h3 class="block-title">Quick Settings</h3>
@@ -186,7 +160,6 @@
                             </div>
                         </div>
                         <div class="block-content">
-                            <!-- Quick Settings Form -->
                             <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
                                 <div class="mb-4">
                                     <p class="fs-sm fw-semibold mb-2">
@@ -231,14 +204,9 @@
                                     </div>
                                 </div>
                             </form>
-                            <!-- END Quick Settings Form -->
                         </div>
                     </div>
-                    <!-- END Quick Settings -->
                 </div>
-                <!-- END Overview Tab -->
-
-                <!-- Sales Tab -->
                 <div class="tab-pane pull-x fade fade-right" id="so-sales" role="tabpanel" aria-labelledby="so-sales-tab">
                     <div class="block block-transparent mb-0">
                         <!-- Stats -->
@@ -254,9 +222,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- END Stats -->
-
-                        <!-- Today -->
                         <div class="block-content block-content-full block-content-sm bg-body-light">
                             <div class="row">
                                 <div class="col-6">
@@ -315,9 +280,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <!-- END Today -->
-
-                        <!-- Yesterday -->
                         <div class="block-content block-content-full block-content-sm bg-body-light">
                             <div class="row">
                                 <div class="col-6">
@@ -408,22 +370,15 @@
                                     </a>
                                 </li>
                             </ul>
-
-                            <!-- More -->
                             <div class="text-center">
                                 <a class="btn btn-sm btn-alt-secondary" href="javascript:void(0)">
                                     <i class="fa fa-arrow-down opacity-50 me-1"></i> Load More..
                                 </a>
                             </div>
-                            <!-- END More -->
                         </div>
-                        <!-- END Yesterday -->
                     </div>
                 </div>
-                <!-- END Sales Tab -->
             </div>
         </div>
-        <!-- END Side Overlay Tabs -->
     </div>
-    <!-- END Side Content -->
 </aside>

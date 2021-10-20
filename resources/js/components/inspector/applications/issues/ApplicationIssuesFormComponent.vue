@@ -48,7 +48,19 @@
             <input type="text" v-model="data.number_issue" class="form-control" id="number_issue">
         </div>
         <div class="col-md-9 col-12">
-
+            <label for="employees" class="form-label">Osoby biorące udział w sprawie</label>
+            <multiselect
+                v-model="data.employees"
+                :options="employees"
+                :multiple="true"
+                :close-on-select="false"
+                :clear-on-select="false"
+                :preserve-search="true"
+                label="name"
+                track-by="id"
+                placeholder="Wybierz z listy"
+                :preselect-first="true">
+            </multiselect>
         </div>
     </div>
 
@@ -63,8 +75,10 @@
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Multiselect from 'vue-multiselect'
 export default {
     name: "ApplicationIssuesFormComponent",
+    components: { Multiselect },
     data() {
         return {
             data: {
@@ -78,11 +92,13 @@ export default {
                 type_id: '',
                 content: '',
                 file: '',
-                attachments: []
+                attachments: [],
+                employees: []
             },
             statuses: [],
             types: [],
-            editor: ClassicEditor
+            editor: ClassicEditor,
+            employees: []
         }
     },
     props: {
@@ -90,7 +106,12 @@ export default {
     },
     methods: {
         save() {
+            this.$axios.post(this.save_url, this.data)
+            .then((data) => {
+                if (data.data.success === 1) {
 
+                }
+            })
         },
         loadStatuses() {
             this.$axios.get(`/inspector/api/get-statuses?resource_type=issues`)
@@ -106,14 +127,30 @@ export default {
                     this.types = data.data.data;
                 })
         },
+        loadEmployees() {
+            this.$axios.get(`/inspector/api/employees`)
+            .then((data) => {
+                this.employees =data.data.data;
+            })
+        }
     },
     created() {
         this.loadStatuses();
         this.loadTypes();
-    }
+        this.loadEmployees();
+    },
 }
 </script>
 
-<style scoped>
-
+<style>
+.multiselect__tags {
+    display: block;
+    padding: 8px 40px 0 8px;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+    background: #fff;
+    font-size: 14px;
+    height: 38px!important;
+    line-height: 18px;
+}
 </style>

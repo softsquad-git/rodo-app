@@ -2,7 +2,7 @@
     <form method="POST">
         <div class="row">
             <div class="col-md-9 col-12">
-                <label for="title" class="form-label">Tytuł</label>
+                <label for="title" class="form-label">Temat</label>
                 <input type="text" class="form-control" v-model="data.title" id="title">
 
                 <label for="content" class="form-label mt-3">Opis</label>
@@ -15,19 +15,7 @@
                 </select>
 
                 <label for="participants" class="form-label mt-3">Uczestnicy</label>
-                <multiselect
-                    v-model="data.participants"
-                    :options="participants"
-                    :multiple="true"
-                    :close-on-select="false"
-                    :clear-on-select="false"
-                    :preserve-search="true"
-                    label="name"
-                    track-by="id"
-                    placeholder="Wybierz z listy"
-                    :preselect-first="true">
-
-                </multiselect>
+                <label v-for="participant in participants" :for="participant.id" class="form-check-label w-100"><input type="checkbox" :id="participant.id" v-model="data.participants" :value="participant.id" class="form-check-input"> {{ participant.name }}</label>
             </div>
         </div>
 

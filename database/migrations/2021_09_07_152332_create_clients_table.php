@@ -24,6 +24,7 @@ class CreateClientsTable extends Migration
             $table->unsignedInteger('gus_info_id')->nullable()->index();
             $table->unsignedInteger('smtp_config_id')->nullable()->index();
             $table->boolean('is_archive')->default(0);
+            $table->unsignedBigInteger('inspector_id')->index()->nullable();
             $table->timestamps();
         });
     }

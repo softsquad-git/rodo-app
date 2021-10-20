@@ -15,6 +15,17 @@
                             </li>
                         @endforeach
                     @endif
+                    @if(isset($pages) && is_array($pages) && count($pages) > 0)
+                        @foreach($pages as $key => $page)
+                            <li class="breadcrumb-item">
+                                @if($key != 0)
+                                    <a class="link-fx" href="{{ route($key) }}">{{ $page }}</a>
+                                @else
+                                    <span class="link-fx">{{ $page }}</span>
+                                @endif
+                            </li>
+                        @endforeach
+                    @endif
                     <li class="breadcrumb-item" aria-current="page">
                         {{ isset($title) ? $title : '' }}
                     </li>

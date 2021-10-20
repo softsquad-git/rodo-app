@@ -2,11 +2,13 @@
 
 namespace App\Models\Assets;
 
+use App\Models\RiskAnalysis\Security;
 use App\Models\Settings\Status;
 use App\Models\Types\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int id
@@ -66,5 +68,18 @@ class SystemIt extends Model
         return $this->belongsTo(Status::class)
             ->where('resource_type', self::$resourceType)
             ->withDefault();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function security(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Security::class,
+            'it_system_security_pivot',
+            'it_system_id',
+            'security_id'
+        );
     }
 }

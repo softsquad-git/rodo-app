@@ -24,10 +24,10 @@ class SystemItRepository
      * @return LengthAwarePaginator
      */
     public function findBy(
-        array  $filters,
-        string $orderingColumn,
-        string $orderingSort,
-        int    $pagination
+        array  $filters = [],
+        string $orderingColumn = 'id',
+        string $orderingSort = 'DESC',
+        int    $pagination = 20
     ): LengthAwarePaginator
     {
         $data = SystemIt::orderBy($orderingColumn, $orderingSort);

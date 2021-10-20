@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inspector\RCP;
 
 use App\Http\Controllers\ApiController;
+use App\Repositories\Datasets\DatasetRepository;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\RCP\RCPActivityRequest;
 use App\Http\Resources\RCP\RCPActivityResource;
@@ -23,11 +24,13 @@ class RCPActivityController extends ApiController
      * @param RCPActivityRepository $RCPActivityRepository
      * @param RCPActivityService $RCPActivityService
      * @param StatusRepository $statusRepository
+     * @param DatasetRepository $datasetRepository
      */
     public function __construct(
         private RCPActivityRepository $RCPActivityRepository,
         private RCPActivityService    $RCPActivityService,
-        private StatusRepository      $statusRepository
+        private StatusRepository      $statusRepository,
+        private DatasetRepository     $datasetRepository
     )
     {
     }
@@ -74,7 +77,8 @@ class RCPActivityController extends ApiController
         return view('inspector.rcp.activity.form', [
             'item' => new RCPActivity(),
             'title' => __('inspector.rcp.activity.form.create.title'),
-            'statuses' => $this->statusRepository->findAll(RCPActivity::$resourceType)
+            'statuses' => $this->statusRepository->findAll(RCPActivity::$resourceType),
+            'datasets' => $this->datasetRepository->findBy()
         ]);
     }
 
@@ -100,7 +104,8 @@ class RCPActivityController extends ApiController
         return view('inspector.rcp.activity.form', [
             'item' => $item,
             'title' => __('inspector.rcp.activity.form.edit.title'),
-            'statuses' => $this->statusRepository->findAll(RCPActivity::$resourceType)
+            'statuses' => $this->statusRepository->findAll(RCPActivity::$resourceType),
+            'datasets' => $this->datasetRepository->findBy()
         ]);
     }
 

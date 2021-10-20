@@ -21,7 +21,10 @@ class TestsResource extends JsonResource
         'description' => "string",
         'group' => "string|null",
         'stat' => "array",
-        'created_at' => "string"
+        'created_at' => "string",
+        'departments' => "mixed",
+        'questions_count' => 'int',
+        'pass_threshold' => 'string'
     ])] public function toArray($request): array|Arrayable|JsonSerializable
     {
         return [
@@ -34,7 +37,10 @@ class TestsResource extends JsonResource
                 'number_questions' => $this->number_questions,
                 'pass_threshold' => $this->pass_threshold
             ],
-            'created_at' => (string)$this->created_at
+            'created_at' => (string)$this->created_at,
+            'departments' => $this->departments,
+            'questions_count' => $this->questions()->count(),
+            'pass_threshold' => $this->pass_threshold
         ];
     }
 }

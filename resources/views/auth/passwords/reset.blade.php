@@ -1,65 +1,48 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+    <div class="p-4 w-100 flex-grow-1 d-flex align-items-center">
+        <div class="w-100">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <p class="mb-3">
+                    <img src="{{ asset('images/logo.png') }}" width="100px" alt="{{ config('app.name') }}">
+                </p>
+                <h1 class="fw-bold mb-2">
+                    Nowe hasło
+                </h1>
+            </div>
+            <!-- END Header -->
+            <div class="row g-0 justify-content-center">
+                <div class="col-sm-8 col-xl-4">
+                    <form action="{{ route('login') }}" method="POST">
                         @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="E-mail">
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="mb-4">
+                            <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Hasło">
+                            @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
+                        <div class="mb-4">
+                            <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password_confirmation" placeholder="Potwierdź hasło">
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <button type="submit" class="btn btn-lg btn-alt-primary">
+                                    <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Zapisz
                                 </button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            <!-- END Sign In Form -->
         </div>
     </div>
-</div>
 @endsection

@@ -25,9 +25,9 @@ class SecurityRepository
      */
     public function findBy(
         array $filters,
-        string $orderingColumn,
-        string $orderingSort,
-        int $pagination
+        string $orderingColumn = 'id',
+        string $orderingSort = 'DESC',
+        int $pagination = 20
     ): LengthAwarePaginator
     {
         $data = Security::orderBy($orderingColumn, $orderingSort);
@@ -40,8 +40,8 @@ class SecurityRepository
             $data->where('name', 'like', '%' . $filters['name'] . '%');
         }
 
-        if (isset($filters['type_id']) && !empty($filters['type_id'])) {
-            $data->where('type_id', $filters['type_id']);
+        if (isset($filters['type']) && !empty($filters['type'])) {
+            $data->where('type', $filters['type']);
         }
 
         if (isset($filters['status_id']) && !empty($filters['status_id'])) {

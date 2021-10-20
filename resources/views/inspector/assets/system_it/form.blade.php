@@ -57,6 +57,12 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-3 col-12">
+                            <label class="form-label">{{ __('inspector.assets.system_it.form.security') }}</label>
+                            @foreach($security as $key => $sec)
+                                <label for="{{ $key }}" class="w-100"><input type="checkbox" id="{{ $key }}" name="security_ids[]" value="{{ $sec->id }}"> {{ $sec->name }}</label>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="mt-3">
                         <button class="btn btn-outline-primary btn-sm" type="submit">{{ __('trans.save') }}</button>

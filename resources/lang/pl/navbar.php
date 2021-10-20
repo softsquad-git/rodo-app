@@ -108,7 +108,7 @@ return [
     'inspector' => [
         'dashboard' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'inspector.index',
             'title' => 'Dashboard',
             'icon' => 'fa fa-tachometer-alt'
         ],
@@ -154,7 +154,7 @@ return [
                 ],
                 'box' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.newsletter.mailbox.index',
                     'title' => 'Skrzynka',
                     'icon' => 'fa fa-box-open'
                 ]
@@ -164,16 +164,18 @@ return [
             'type' => $types['sub'],
             'title' => 'Szkolenia',
             'icon' => 'si si-size-actual',
+            'name' => 'trainings',
+            'name_sub' => 'trainings',
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.trainings.index',
                     'title' => 'Lista',
                     'icon' => 'si si-list'
                 ],
                 'tests' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.trainings.tests.index',
                     'title' => 'Testy',
                     'icon' => 'fa fa-university'
                 ],
@@ -244,9 +246,10 @@ return [
         ],
         'areas_processing' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'inspector.processing_areas.index',
             'title' => 'Obszary przetwarzania',
-            'icon' => 'fa fa-table'
+            'icon' => 'fa fa-table',
+            'name' => 'processing-areas'
         ],
         'assets' => [
             'type' => $types['sub'],
@@ -257,7 +260,7 @@ return [
             'items' => [
                 'resources' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'inspector.assets.resources.index',
                     'title' => 'Zasoby',
                     'icon' => 'si si-list'
                 ],
@@ -333,23 +336,23 @@ return [
     'employee' => [
         'dashboard' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'employee.index',
             'title' => 'Pulpit',
             'icon' => 'si si-speedometer',
             'name' => 'dashboard'
         ],
         'profile' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'employee.profile',
             'title' => 'Profil',
             'icon' => 'si si-user',
             'name' => 'profile'
         ],
         'permissions' => [
             'type' => $types['single'],
-            'route' => '',
+            'route' => 'employee.permissions.index',
             'title' => 'Uprawnienia',
-            'icon' => '',
+            'icon' => 'si si-lock',
             'name' => 'permissions'
         ],
         'tutorials' => [
@@ -361,19 +364,19 @@ return [
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'employee.trainings.index',
                     'title' => 'Wykaz',
                     'icon' => 'si si-list'
                 ],
                 'tests' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'employee.trainings.tests.index',
                     'title' => 'Testy',
                     'icon' => 'si si-speedometer'
                 ],
                 'certificates' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'employee.trainings.certificates.index',
                     'title' => 'Certyfikaty',
                     'icon' => 'si si-trophy'
                 ]
@@ -382,7 +385,7 @@ return [
         'docs' => [
             'type' => $types['single'],
             'title' => 'Dokumenty',
-            'route' => '',
+            'route' => 'employee.documents.index',
             'icon' => 'fa fa-university',
             'name' => 'documents'
         ],
@@ -395,19 +398,25 @@ return [
             'items' => [
                 'list' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'employee.applications.index',
+                    'title' => 'Lista',
+                    'icon' => 'si si-list'
+                ],
+                'conclusions' => [
+                    'type' => $types['single'],
+                    'route' => 'employee.applications.conclusions.index',
                     'title' => 'Wnioski',
                     'icon' => 'si si-list'
                 ],
                 'issues' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'employee.applications.issues.index',
                     'title' => 'Sprawy',
                     'icon' => 'si si-list'
                 ],
                 'incidents' => [
                     'type' => $types['single'],
-                    'route' => '',
+                    'route' => 'employee.applications.incidents.index',
                     'title' => 'Incydenty',
                     'icon' => 'si si-list'
                 ]

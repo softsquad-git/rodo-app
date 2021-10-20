@@ -51,6 +51,23 @@ Vue.component('inspector-assets-system-it-list-component', require('./components
 Vue.component('inspector-rcp-law-basic-list-component', require('./components/inspector/rcp/LawBasicListComponent.vue').default);
 Vue.component('inspector-rcp-activity-list-component', require('./components/inspector/rcp/RCPActivityListComponent.vue').default);
 Vue.component('inspector-rcp-data-retention-list-component', require('./components/inspector/rcp/RCPDataRetentionListComponent.vue').default);
+Vue.component('inspector-processing-areas-list-component', require('./components/inspector/processing_areas/ProcessingAreasListComponent.vue').default);
+Vue.component('inspector-processing-area-form-component', require('./components/inspector/processing_areas/ProcessingAreaFormComponent.vue').default);
+Vue.component('inspector-trainings-list-component', require('./components/inspector/trainings/TrainingsListComponent.vue').default);
+Vue.component('inspector-trainings-tests-list-component', require('./components/inspector/trainings/TrainingsTestsListComponent.vue').default);
+Vue.component('inspector-assets-resources-list-component', require('./components/inspector/assets/ResourcesListComponent.vue').default);
+Vue.component('inspector-newsletter-mailbox-list-component', require('./components/inspector/newsletter/NewsletterMailboxListComponent.vue').default);
+
+Vue.component('employee-applications-list-component', require('./components/employee/applications/ApplicationListComponent.vue').default);
+Vue.component('employee-applications-conclusions-list-component', require('./components/employee/applications/ApplicationConclusionsListComponent.vue').default);
+Vue.component('employee-applications-issues-list-component', require('./components/employee/applications/ApplicationIssuesListComponent.vue').default);
+Vue.component('employee-applications-incidents-component', require('./components/employee/applications/ApplicationIncidentsListComponent.vue').default);
+Vue.component('employee-documents-list-component', require('./components/employee/documents/DocumentsListComponent.vue').default);
+Vue.component('employee-permissions-list-component', require('./components/employee/permissions/PermissionsListComponent.vue').default);
+Vue.component('employee-trainings-list-component', require('./components/employee/trainings/TrainingsListComponent.vue').default);
+Vue.component('employee-trainings-test-list-component', require('./components/employee/trainings/TrainingTestsListComponent.vue').default);
+Vue.component('employee-trainings-certificates-list-component', require('./components/employee/trainings/TrainingCertificatesListComponent.vue').default);
+Vue.component('employee-training-browser-component', require('./components/employee/trainings/TrainingBrowserPdfComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

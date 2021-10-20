@@ -3,6 +3,7 @@
 namespace App\Services\Trainings;
 
 use App\Models\Trainings\Training;
+use App\Traits\GenerateNumber;
 use App\Traits\UploadFileTrait;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
 class TrainingService
 {
     use UploadFileTrait;
+    use GenerateNumber;
 
     /**
      * @param array $data
@@ -27,7 +29,7 @@ class TrainingService
         DB::beginTransaction();
         try {
             $data['file'] = $this->uploadSingleFile($data['file'], Training::$fileDir);
-            $data['number'] = Str::random(4);
+            $data['number'] = $this->generateRandomNumber();
             /**
              * @var Training $training
              */

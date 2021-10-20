@@ -62,9 +62,7 @@
                         {{ item.status }}
                     </td>
                     <td class="fs-sm">
-                        <ul>
-                            <li v-for="employee in item.employees">{{ employee.name }}</li>
-                        </ul>
+                        {{ item.employees.length }}
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

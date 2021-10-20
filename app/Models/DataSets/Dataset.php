@@ -2,12 +2,17 @@
 
 namespace App\Models\DataSets;
 
+use App\Models\Assets\Resource;
+use App\Models\Assets\SystemIt;
 use App\Models\Categories\CategoryPeople;
+use App\Models\ProcessingAreas\ProcessingArea;
+use App\Models\RCP\LawBasic;
 use App\Models\Settings\Status;
 use App\Models\Types\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -131,4 +136,57 @@ class Dataset extends Model
             ->where('resource_type', self::$resourceType)
             ->withDefault();
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function processingAreas(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            ProcessingArea::class,
+            'dataset_processing_area_pivot',
+            'dataset_id',
+            'processing_area_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function itSystems(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            SystemIt::class,
+            'dataset_it_system_pivot',
+            'dataset_id',
+            'system_it_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function resources(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Resource::class,
+            'dataset_resources_pivot',
+            'dataset_id',
+            'resource_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function basicLaw(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            LawBasic::class,
+            'dataset_basic_law_pivot',
+            'dataset_id',
+            'basic_law_id'
+        );
+    }
+
 }

@@ -4,15 +4,15 @@ namespace App\Services\Applications;
 
 use App\Models\Applications\ApplicationConclusion;
 use App\Models\Applications\ApplicationConclusionAttachment;
+use App\Traits\GenerateNumber;
 use App\Traits\UploadFileTrait;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ApplicationConclusionService
 {
     use UploadFileTrait;
+    use GenerateNumber;
 
     /**
      * @param array $data
@@ -35,7 +35,7 @@ class ApplicationConclusionService
 
         DB::beginTransaction();
         try {
-            $data['number'] = Str::random(3);
+            $data['number'] = $this->generateRandomNumber();
             $data['date_application'] = date('Y-m-d H:i:s');
             $applicationConclusion = ApplicationConclusion::create($data);
 

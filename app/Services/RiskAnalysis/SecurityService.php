@@ -3,10 +3,12 @@
 namespace App\Services\RiskAnalysis;
 
 use App\Models\RiskAnalysis\Security;
-use Illuminate\Support\Str;
+use App\Traits\GenerateNumber;
 
 class SecurityService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param Security|null $security
@@ -20,7 +22,7 @@ class SecurityService
             return $security;
         }
 
-        $data['number'] = Str::random(3);
+        $data['number'] = $this->generateRandomNumber();
         return Security::create($data);
     }
 

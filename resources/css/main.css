@@ -39,3 +39,33 @@
 }
 .multiselect__tags {min-height: 37px!important;}
 .ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {min-height: 250px!important;}
+.small-no-item {
+    font-size: 12px;
+    color: red;
+}
+.btn-link {
+    border: 0;
+    background: 0;
+    font-weight: bold;
+}
+button.close {
+    background: transparent;
+    border: 0;
+    font-size: 25px;
+    margin-top: -3px;
+}
+.ordering {
+    float: right;
+    display: inline-block;
+    position: relative;
+}
+.ordering:hover {
+    cursor: pointer;
+}
+.question {
+    font-size: 20px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 10px;
+    margin-top: 30px;
+}

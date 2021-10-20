@@ -3,12 +3,14 @@
 namespace App\Services\Newsletter;
 
 use App\Models\Newsletter\NewsletterPost;
+use App\Traits\GenerateNumber;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class NewsletterPostService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param NewsletterPost|null $newsletterPost
@@ -24,7 +26,7 @@ class NewsletterPostService
 
         DB::beginTransaction();
         try {
-            $data['number'] = Str::random(3);
+            $data['number'] = $this->generateRandomNumber();
             /**
              * @var NewsletterPost $newsletterPost
              */

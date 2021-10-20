@@ -5,15 +5,16 @@ namespace App\Services\Tasks;
 use App\Interfaces\MailInterface;
 use App\Models\Tasks\Task;
 use App\Models\Tasks\TaskAttachment;
+use App\Traits\GenerateNumber;
 use App\Traits\UploadFileTrait;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class TaskService
 {
     use UploadFileTrait;
+    use GenerateNumber;
 
     public function __construct(
         private MailInterface $mail
@@ -46,8 +47,11 @@ class TaskService
 
         DB::beginTransaction();
         try {
-            $data['number'] = Str::random(4);
+            $data['number'] = $this->generateRandomNumber();
             $data['creator_id'] = Auth::id();
+            /**
+             * @var Task $task
+             */
             $task = Task::create($data);
             if (isset($data['attachments']) && count($data['attachments']) > 0) {
                 foreach ($data['attachments'] as $attachment) {
@@ -58,6 +62,16 @@ class TaskService
                     ]);
                 }
             }
+
+            $this->mail
+                ->setFrom(config('mail.from'))
+                ->setTo($task->user->email)
+                ->setSubject(__('_mail.subjects.new_task'))
+                ->setTemplate('inspector.tasks.new_task')
+                ->setBody([
+                    'task' => $task
+                ])
+                ->send();
 
             DB::commit();
             return $task;

@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Assets\SystemItRequest;
 use App\Http\Resources\Assets\SystemItResource;
 use App\Models\Assets\SystemIt;
+use App\Models\RiskAnalysis\Security;
 use App\Repositories\Assets\SystemItRepository;
+use App\Repositories\RiskAnalysis\SecurityRepository;
 use App\Repositories\Settings\StatusRepository;
 use App\Repositories\Settings\TypeRepository;
 use App\Services\Assets\SystemItService;
@@ -26,12 +28,14 @@ class SystemItController extends ApiController
      * @param SystemItService $systemItService
      * @param StatusRepository $statusRepository
      * @param TypeRepository $typeRepository
+     * @param SecurityRepository $securityRepository
      */
     public function __construct(
         private SystemItRepository $systemItRepository,
         private SystemItService    $systemItService,
         private StatusRepository   $statusRepository,
-        private TypeRepository     $typeRepository
+        private TypeRepository     $typeRepository,
+        private SecurityRepository $securityRepository
     )
     {
     }
@@ -79,7 +83,8 @@ class SystemItController extends ApiController
             'title' => __('inspector.assets.system_it.form.create.title'),
             'item' => new SystemIt(),
             'statuses' => $this->statusRepository->findAll(SystemIt::$resourceType),
-            'types' => $this->typeRepository->findAll(SystemIt::$resourceType)
+            'types' => $this->typeRepository->findAll(SystemIt::$resourceType),
+            'security' => $this->securityRepository->findBy(['type' => Security::$types['it']])
         ]);
     }
 
@@ -106,7 +111,8 @@ class SystemItController extends ApiController
             'title' => __('inspector.assets.system_it.form.edit.title'),
             'item' => $item,
             'statuses' => $this->statusRepository->findAll(SystemIt::$resourceType),
-            'types' => $this->typeRepository->findAll(SystemIt::$resourceType)
+            'types' => $this->typeRepository->findAll(SystemIt::$resourceType),
+            'security' => $this->securityRepository->findBy(['type' => Security::$types['it']])
         ]);
     }
 

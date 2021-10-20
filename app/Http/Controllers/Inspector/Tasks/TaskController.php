@@ -71,13 +71,21 @@ class TaskController extends ApiController
                 ->with('');
         }
 
-        return \view('inspector.tasks.form', [
+        $employees = $this->userRepository->findBy([
+            'role' => Role::$role['EMPLOYEE']
+        ], 'desc', 20, true);
+
+        $inspectors = $this->userRepository->findBy([
+            'role' => Role::$role['INSPECTOR']
+        ], 'desc', 20, true);
+
+        $users = $employees->merge($inspectors);
+
+        return view('inspector.tasks.form', [
             'title' => __('inspector.tasks.form.create.title'),
             'item' => new Task(),
             'statuses' => $this->statusRepository->findAll(Task::$resourceType),
-            'users' => $this->userRepository->findBy([
-                'role' => Role::$role['EMPLOYEE']
-            ], 'desc', 20, true)
+            'users' => $users
         ]);
     }
 
@@ -100,13 +108,21 @@ class TaskController extends ApiController
                 ->with('');
         }
 
+        $employees = $this->userRepository->findBy([
+            'role' => Role::$role['EMPLOYEE']
+        ], 'desc', 20, true);
+
+        $inspectors = $this->userRepository->findBy([
+            'role' => Role::$role['INSPECTOR']
+        ], 'desc', 20, true);
+
+        $users = $employees->merge($inspectors);
+
         return \view('inspector.tasks.form', [
             'title' => __('inspector.tasks.form.create.title'),
             'item' => $item,
             'statuses' => $this->statusRepository->findAll(Task::$resourceType),
-            'users' => $this->userRepository->findBy([
-                'role' => Role::$role['EMPLOYEE']
-            ], 'desc', 20, true)
+            'users' => $users
         ]);
     }
 

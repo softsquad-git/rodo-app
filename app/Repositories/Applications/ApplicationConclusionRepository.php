@@ -60,6 +60,10 @@ class ApplicationConclusionRepository
             $data->where('user_id', $filters['user_id']);
         }
 
+        if (isset($filters['accepted_employee_id']) && !empty($data['accepted_employee_id'])) {
+            $data->where('accepted_employee_id', $filters['accepted_employee_id']);
+        }
+
         return $data->paginate($pagination);
     }
 }

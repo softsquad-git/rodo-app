@@ -30,4 +30,13 @@ class SettingRepository
     {
         return Setting::all();
     }
+
+    /**
+     * @param array $filters
+     * @return Setting|null
+     */
+    public function findByOne(array $filters): ?Setting
+    {
+        return Setting::where($filters)->first();
+    }
 }

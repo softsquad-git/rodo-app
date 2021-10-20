@@ -2,9 +2,12 @@
 
 namespace App\Models\Users;
 
+use App\Models\Employees\Employee;
 use App\Models\Settings\Status;
+use App\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -26,6 +29,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static orderBy(string $string, string $ordering)
  * @property string $avatarDir
  * @property int|null status_id
+ * @property Employee|null employee
  */
 class User extends Authenticatable
 {
@@ -92,5 +96,21 @@ class User extends Authenticatable
     public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class)->withDefault();
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function employee(): HasOne
+    {
+        return $this->hasOne(Employee::class, 'user_id');
+    }
+
+    /**
+     * @param string $token
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

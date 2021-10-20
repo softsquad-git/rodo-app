@@ -32,7 +32,7 @@
                         <div class="col-md-3 col-12">
                             <select class="form-control form-control-sm form-control-alt" v-model="filters.type">
                                 <option value="" selected>Rodzaj</option>
-                                <option v-for="type in types" :value="type.id">{{ type.name }}</option>
+                                <option v-for="(type, index) in types" :value="index">{{ type }}</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -65,7 +65,7 @@
                         {{ item.name }}
                     </td>
                     <td class="fs-sm">
-                        {{ item.type.name }}
+                        {{ item.type }}
                     </td>
                     <td class="fs-sm">
                         <select class="form-control form-control-alt form-control-sm">
@@ -111,16 +111,16 @@ export default {
             paginationNumbers: [5, 10, 20, 30, 50],
             isSearchBox: false,
             statuses: [],
-            types: []
         }
     },
     props: {
         list_url: '',
-        create_url: ''
+        create_url: '',
+        types: ''
     },
     methods: {
         loadItems(page = 1) {
-            this.$axios.get(this.list_url+`?page=${page}&pagination=${this.filters.pagination}&id=${this.filters.id}&number=${this.filters.number}&name=${this.filters.name}&status_id=${this.filters.status_id}&type_id=${this.filters.type}`)
+            this.$axios.get(this.list_url+`?page=${page}&pagination=${this.filters.pagination}&id=${this.filters.id}&number=${this.filters.number}&name=${this.filters.name}&status_id=${this.filters.status_id}&type=${this.filters.type}`)
                 .then((data) => {
                     this.data = data.data;
                 }).catch((error) => {
@@ -134,12 +134,6 @@ export default {
                 }).catch((error) => {
                 //
             })
-        },
-        loadTypes() {
-            this.$axios.get(`/administration/api/settings/types?resource_type=security`)
-                .then((data) => {
-                    this.types = data.data.data;
-                })
         },
         remove(id) {
             this.$swal.fire({
@@ -176,7 +170,7 @@ export default {
     created() {
         this.loadItems();
         this.loadStatuses();
-        this.loadTypes();
+        this.types = JSON.parse(this.types);
     }
 }
 </script>

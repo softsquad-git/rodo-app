@@ -1,11 +1,9 @@
-
 window._ = require('lodash');
 
 try {
     window.Popper = require('popper.js').default;
-    window.$ = window.jQuery = require('./theme/lib/jquery.min');
+    window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
     require('./theme/oneui.app.min');
     require('./pages/be_pages_dashboard_v1');
     require('./pages/be_pages_dashboard');

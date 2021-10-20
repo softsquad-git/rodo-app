@@ -2,6 +2,8 @@
 
 namespace App\Models\Trainings;
 
+use App\Models\Departments\Department;
+use App\Models\Tests\Test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -32,7 +34,9 @@ class TrainingGroup extends Model
         'name'
     ];
 
-
+    /**
+     * @return BelongsToMany
+     */
     public function trainings(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -40,6 +44,30 @@ class TrainingGroup extends Model
             'trainings_groups_pivot',
             'group_id',
             'training_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function departments(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Department::class,
+            'training_group_department_pivot',
+            'training_group_id',
+            'department_id'
+        );
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tests(): HasMany
+    {
+        return $this->hasMany(
+            Test::class,
+            'group_id'
         );
     }
 }

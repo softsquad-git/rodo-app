@@ -2,12 +2,14 @@
 
 namespace App\Models\Applications;
 
+use App\Models\Employees\Employee;
 use App\Models\Settings\Status;
 use App\Models\Types\Type;
 use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -29,6 +31,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Status status
  * @method static orderBy(string $orderingColumn, string $orderingSort)
  * @method static find(int $id)
+ * @method static create(array $data)
  */
 class ApplicationIssue extends Model
 {
@@ -113,5 +116,18 @@ class ApplicationIssue extends Model
         }
 
         return null;
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Employee::class,
+            'issue_employees_pivot',
+            'issue_id',
+            'employee_id'
+        );
     }
 }

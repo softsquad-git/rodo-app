@@ -4,6 +4,7 @@ namespace App\Models\Departments;
 
 use App\Models\Employees\Employee;
 use App\Models\Settings\Status;
+use App\Models\Tests\Test;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -61,6 +62,19 @@ class Department extends Model
             'employee_department_pivot',
             'department_id',
             'employee_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function tests(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Test::class,
+            'test_department_pivot',
+            'department_id',
+            'test_id'
         );
     }
 }

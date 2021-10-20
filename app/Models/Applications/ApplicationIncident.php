@@ -2,12 +2,15 @@
 
 namespace App\Models\Applications;
 
+use App\Models\Employees\Employee;
+use App\Models\RCP\RCPActivity;
 use App\Models\Settings\Status;
 use App\Models\Types\Type;
 use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -119,5 +122,31 @@ class ApplicationIncident extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(ApplicationIncidentAttachment::class, 'incident_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function employees(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Employee::class,
+            'incident_employees_pivot',
+            'incident_id',
+            'employee_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function activities(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            RCPActivity::class,
+            'incident_activities_pivot',
+            'incident_id',
+            'activity_id'
+        );
     }
 }

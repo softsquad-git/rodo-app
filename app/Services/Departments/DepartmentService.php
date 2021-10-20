@@ -3,10 +3,12 @@
 namespace App\Services\Departments;
 
 use App\Models\Departments\Department;
-use Illuminate\Support\Str;
+use App\Traits\GenerateNumber;
 
 class DepartmentService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param Department|null $department
@@ -19,7 +21,7 @@ class DepartmentService
             return $department;
         }
 
-        $data['number'] = Str::random(3);
+        $data['number'] = $this->generateRandomNumber();
         return Department::create($data);
     }
 

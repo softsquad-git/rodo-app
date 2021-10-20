@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 @section('title', $title)
 @section('content')
-    @include('partials.hero', ['title' => $title, 'breadcrumb' => ['admin.index' => __('admin.title')]])
+    @include('partials.hero', ['title' => $title, 'breadcrumb' => ['admin.index' => __('admin.title')], 'pages' => [
+    'admin.trainings.index' => 'Szkolenia',
+    'admin.certificates.index' => 'Certyfikaty'
+]])
     <div id="app" class="content">
         <certificates-patters-list-component list_url="{{ route('api.admin.certificates.patters.list') }}" create_url="{{ route('admin.certificates.patters.create') }}"></certificates-patters-list-component>
     </div>

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string name
  * @property boolean is_true
  * @method static create(array $array)
+ * @method static whereIn(string $string, array $answersIds)
  */
 class TestQuestionAnswer extends Model
 {

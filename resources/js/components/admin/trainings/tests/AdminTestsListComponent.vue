@@ -55,9 +55,12 @@
                     <td class="text-left fs-sm">{{ index + 1 }}</td>
                     <td class="fs-sm">{{ item.number }}</td>
                     <td class="fs-sm">{{ item.name }}</td>
-                    <td class="fs-sm">{{ item.description }}</td>
+                    <td class="fs-sm" v-html="item.description"></td>
                     <td class="fs-sm">{{ item.group }}</td>
-                    <td class="fs-sm"></td>
+                    <td class="fs-sm">
+                        Pytań: {{ item.questions_count }} <br/>
+                        Zaliczenie: {{ item.pass_threshold }}%
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <a :href="`/administration/trainings/tests/update/${item.id}`"

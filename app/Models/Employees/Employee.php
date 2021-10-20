@@ -2,6 +2,8 @@
 
 namespace App\Models\Employees;
 
+use App\Models\Applications\ApplicationIncident;
+use App\Models\Applications\ApplicationIssue;
 use App\Models\Clients\Client;
 use App\Models\Departments\Department;
 use App\Models\Roles\Role;
@@ -121,5 +123,31 @@ class Employee extends Model
         return $this->belongsTo(Type::class)
             ->where('resource_type', self::$resourceTypeContract)
             ->withDefault();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function incidents(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            ApplicationIncident::class,
+            'incident_employees_pivot',
+            'employee_id',
+            'incident_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function issues(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            ApplicationIssue::class,
+            'issue_employees_pivot',
+            'employee_id',
+            'issue_id'
+        );
     }
 }

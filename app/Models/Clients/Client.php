@@ -5,6 +5,7 @@ namespace App\Models\Clients;
 use App\Models\Gus\GusInformation;
 use App\Models\Settings\Status;
 use App\Models\Types\Type;
+use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int gus_info_id
  * @property int smtp_config_id
  * @property bool is_archive
+ * @property int inspector_id
  * @property int id
  */
 class Client extends Model
@@ -51,7 +53,8 @@ class Client extends Model
         'status_id',
         'address',
         'name',
-        'is_archive'
+        'is_archive',
+        'inspector_id'
     ];
 
     /**
@@ -106,5 +109,14 @@ class Client extends Model
     public function certificates(): HasMany
     {
         return $this->hasMany(ClientCertificate::class, 'client_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function inspector(): BelongsTo
+    {
+        return $this->belongsTo(User::class)
+            ->withDefault();
     }
 }

@@ -55,6 +55,9 @@ return [
             'content' => 'Treść',
             'status' => 'Status',
             'clients' => 'Firmy'
+        ],
+        'mailbox' => [
+            'title' => 'Skrzynka'
         ]
     ],
     'documents' => [
@@ -123,7 +126,7 @@ return [
         ]
     ],
     'datasets' => [
-        'title'  => 'Zbiory danych',
+        'title' => 'Zbiory danych',
         'form' => [
             'create' => [
                 'title' => 'Dodaj zbiór'
@@ -147,8 +150,26 @@ return [
                 'owner' => 'Właściciel',
                 'description' => 'Opis',
                 'type' => 'Rodzaj',
-                'status' => 'Status'
+                'status' => 'Status',
+                'security' => 'Zabezpieczenia'
             ]
+        ],
+        'resources' => [
+            'title' => 'Zasoby',
+            'form' => [
+                'create' => [
+                    'title' => 'Dodaj zasób'
+                ],
+                'edit' => [
+                    'title' => 'Edytuj zasób'
+                ],
+                'name' => 'Nazwa',
+                'owner' => 'Właściciel',
+                'description' => 'Opis',
+                'type' => 'Rodzaj',
+                'status' => 'Status',
+                'security' => 'Zabezpieczenia'
+            ],
         ]
     ],
     'risk_analysis' => [
@@ -214,6 +235,23 @@ return [
                 'unit_month' => 'Miesiąc',
                 'unit_year' => 'Rok',
             ]
+        ]
+    ],
+    'processing_areas' => [
+        'title' => 'Obszary przetwarzania',
+        'form' => [
+            'create' => [
+                'title' => 'Dodaj obszar'
+            ],
+            'edit' => [
+                'title' => 'Edytuj obszar'
+            ]
+        ]
+    ],
+    'trainings' => [
+        'title' => 'Szkolenia',
+        'tests' => [
+            'title' => 'Testy'
         ]
     ]
 ];

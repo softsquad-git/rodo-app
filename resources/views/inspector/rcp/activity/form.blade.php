@@ -37,6 +37,17 @@
                         </div>
                     </div>
 
+                    <div class="row mt-3">
+                        <div class="col-md-4 col-12">
+                            <label for="datasets" class="form-label">Powiązane zbiory</label>
+                            <select class="form-control js-example-basic-multiple" id="datasets" multiple name="datasets[]">
+                                @foreach($datasets as $dataset)
+                                    <option value="{{ $dataset->id }}">{{ $dataset->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="mt-3">
                         <button class="btn btn-outline-primary btn-sm" type="submit">{{ __('trans.save') }}</button>
                         <a href="{{ route('inspector.rcp.activity.index') }}" class="btn btn-outline-danger btn-sm">{{ __('trans.cancel') }}</a>

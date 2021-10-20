@@ -25,6 +25,11 @@ class DbSettingSeeder extends Seeder
                 'type' => Setting::$types['file'],
                 'value' => ''
             ],
+            [
+                'name' => Setting::$names['number_pattern'],
+                'type' => Setting::$types['text'],
+                'value' => ''
+            ]
         ];
 
         Setting::insert($data);

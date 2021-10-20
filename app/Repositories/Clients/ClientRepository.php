@@ -40,6 +40,10 @@ class ClientRepository
             $data->where('is_archive', $filters['is_archive']);
         }
 
+        if (isset($filters['inspector_id']) && !empty($filters['inspector_id'])) {
+            $data->where('inspector_id', $filters['inspector_id']);
+        }
+
         return $data->paginate($pagination);
     }
 

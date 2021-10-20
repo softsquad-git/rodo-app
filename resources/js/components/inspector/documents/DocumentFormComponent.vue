@@ -48,7 +48,17 @@
                                                        name="is_required_confirmation"> Nie</label>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-3 col-12">
+                <label for="department" class="form-label">Działy</label>
+                <multiselect
+                    :options="departments"
+                    v-model="departmentModel"
+                    track-by="id"
+                    label="name"
+                    :multiple="true"
+                ></multiselect>
+            </div>
+            <div class="col-md-3 col-12">
                 <label for="file" class="form-label">Załącznik (pdf)</label>
                 <input type="file" v-on:change="changeFile" class="form-control" ref="file" id="file">
             </div>
@@ -63,8 +73,10 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect'
 export default {
     name: "DocumentFormComponent",
+    components: { Multiselect },
     data() {
         return {
             data: {
@@ -80,10 +92,12 @@ export default {
                 attachments: [{
                     type_id: '',
                     file: ''
-                }]
+                }],
+                department_ids: []
             },
             statuses: [],
-            types: []
+            types: [],
+            departments: []
         }
     },
     props: {
@@ -101,6 +115,7 @@ export default {
             formData.append('is_required_confirmation', this.data.is_required_confirmation);
             formData.append('status_id', this.data.status_id);
             formData.append('file', this.data.file, this.data.file.name);
+            formData.append('department_ids', JSON.stringify(this.data.department_ids));
 
             this.$axios.post(this.save_url, formData)
                 .then((data) => {
@@ -125,11 +140,29 @@ export default {
         },
         changeFile(e) {
             this.data.file = e.target.files[0]
+        },
+        loadDepartments() {
+            this.$axios.get(`/inspector/api/departments`)
+            .then((data) => {
+                this.departments = data.data.data;
+                console.log(data.data.data)
+            })
+        },
+    },
+    computed: {
+        departmentModel: {
+            get() {
+                return this.departments.filter(department => this.data.department_ids.includes(department.id));
+            },
+            set(val) {
+                this.data.department_ids = val.map(department => department.id);
+            }
         }
     },
     created() {
         this.loadTypes();
         this.loadStatuses();
+        this.loadDepartments();
     }
 }
 </script>

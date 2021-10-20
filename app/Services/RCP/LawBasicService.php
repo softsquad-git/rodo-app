@@ -3,9 +3,12 @@
 namespace App\Services\RCP;
 
 use App\Models\RCP\LawBasic;
+use App\Traits\GenerateNumber;
 
 class LawBasicService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param LawBasic|null $lawBasic
@@ -19,6 +22,7 @@ class LawBasicService
             return $lawBasic;
         }
 
+        $data['number'] = $this->generateRandomNumber();
         return LawBasic::create($data);
     }
 

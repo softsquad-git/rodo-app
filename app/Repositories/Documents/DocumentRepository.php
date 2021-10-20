@@ -24,16 +24,26 @@ class DocumentRepository
      * @return LengthAwarePaginator
      */
     public function findBy(
-        array  $filters,
-        string $orderingColumn,
-        string $orderingSort,
-        int    $pagination
+        array  $filters = [],
+        string $orderingColumn = 'id',
+        string $orderingSort = 'DESC',
+        int    $pagination = 20
     ): LengthAwarePaginator
     {
         $data = Document::orderBy($orderingColumn, $orderingSort);
 
         if (isset($filters['type_id']) && !empty($filters['type_id'])) {
             $data->where('type_id', $filters['type_id']);
+        }
+
+        if (isset($filters['user_id']) && !empty($filters['user_id'])) {
+            $data->whereHas('departments', function ($department) use ($filters) {
+                $department->whereHas('employees', function ($employee) use ($filters) {
+                    $employee->whereHas('user', function ($user) use ($filters) {
+                        $user->where('id', $filters['user_id']);
+                    });
+                });
+            });
         }
 
         return $data->paginate($pagination);

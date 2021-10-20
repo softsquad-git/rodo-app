@@ -65,8 +65,8 @@
                     <td class="fs-sm">
                         {{ item.name }}
                     </td>
-                    <td class="fs-sm">
-                        {{ item.description }}
+                    <td class="fs-sm" v-html="item.description">
+
                     </td>
                     <td class="fs-sm">
                         <ul>

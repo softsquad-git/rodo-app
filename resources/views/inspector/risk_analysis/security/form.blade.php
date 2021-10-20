@@ -19,12 +19,12 @@
                         </div>
                         <div class="col-md-4 col-12">
                             <label for="type" class="form-label">{{ __('inspector.risk_analysis.security.form.type') }}</label>
-                            <select class="form-control" id="type" name="type_id">
+                            <select class="form-control" id="type" name="type">
                                 @foreach($types as $type)
-                                    <option value="{{ $type->id }}"{{ $item->type_id ? ($item->type_id == $type->id ? 'selected' : '') : (old('type_id') == $type->id ? 'selected' : '') }}>{{ $type->name }}</option>
+                                    <option value="{{ $type }}"{{ $item->type ? ($item->type == $type ? 'selected' : '') : (old('type') == $type ? 'selected' : '') }}>{{ __('trans.security_types.'.$type) }}</option>
                                 @endforeach
                             </select>
-                            @error('type_id')
+                            @error('type')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

@@ -3,13 +3,16 @@
 namespace App\Services\Applications;
 
 use App\Models\Applications\ApplicationIssue;
+use App\Traits\GenerateNumber;
 use App\Traits\UploadFileTrait;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ApplicationIssueService
 {
     use UploadFileTrait;
+    use GenerateNumber;
 
     /**
      * @param array $data
@@ -35,8 +38,20 @@ class ApplicationIssueService
                 $data['file'] = $this->uploadSingleFile($data['file'], ApplicationIssue::$fileDir);
             }
 
+            $data['number'] = $this->generateRandomNumber();
+            $data['user_id'] = Auth::id();
+            /**
+             * @var ApplicationIssue $applicationIssue
+             */
+            $applicationIssue = ApplicationIssue::create($data);
+            $employeeIds = [];
+            foreach ($data['employees'] as $employee) {
+                $employeeIds[] = $employee['id'];
+            }
+            $applicationIssue->employees()->sync($employeeIds);
+
             DB::commit();
-            return ApplicationIssue::create($data);
+            return $applicationIssue;
         } catch (Exception $e) {
             DB::rollBack();
             throw new Exception($e->getMessage());

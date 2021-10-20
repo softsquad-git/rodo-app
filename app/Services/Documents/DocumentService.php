@@ -4,14 +4,15 @@ namespace App\Services\Documents;
 
 use App\Models\Documents\Document;
 use App\Models\Documents\DocumentAttachment;
+use App\Traits\GenerateNumber;
 use App\Traits\UploadFileTrait;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class DocumentService
 {
     use UploadFileTrait;
+    use GenerateNumber;
 
     /**
      * @param array $data
@@ -34,7 +35,7 @@ class DocumentService
             } else {
                 $data['is_indefinitely'] = 0;
             }
-            $data['number'] = Str::random(3);
+            $data['number'] = $this->generateRandomNumber();
             $data['file'] = $this->uploadSingleFile($data['file'], Document::$fileDir);
             /**
              * @var Document $document
@@ -48,6 +49,10 @@ class DocumentService
                         'file' => $this->uploadSingleFile($attachment['file'], Document::$fileDir)
                     ]);
                 }
+            }
+
+            if (isset($data['department_ids']) && count(json_decode($data['department_ids'], true)) > 0) {
+                $document->departments()->sync(json_decode($data['department_ids'], true));
             }
 
             DB::commit();

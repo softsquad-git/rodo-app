@@ -27,7 +27,7 @@
 
     <div class="row mt-3">
         <div class="col-md-3 col-12">
-            <label for="category_people" class="form-label">Kategoria osoób</label>
+            <label for="category_people" class="form-label">Kategoria osób</label>
             <select class="form-control" id="category_people" v-model="data.category_people_id">
                 <option v-for="categoryPeople in categoriesPeople" :value="categoryPeople.id">{{ categoryPeople.name }}</option>
             </select>
@@ -44,21 +44,51 @@
     <div class="row mt-3">
         <div class="col-md-3 col-12">
             <label for="areas_processing" class="form-label">Obszary przetwarzania</label>
-
+            <multiselect
+                v-model="data.processing_area_ids"
+                label="name"
+                :multiple="true"
+                placeholder="Wybierz"
+                :internal-search="false"
+                track-by="name"
+                :options="processingAreas">
+            </multiselect>
         </div>
         <div class="col-md-3 col-12">
             <label for="system_it" class="form-label">System IT</label>
-            <select id="system_id" class="form-control" v-model="data.system_id">
-                <option v-for="system in systemsId" :value="system.id">{{ system.name }}</option>
-            </select>
+            <multiselect
+                v-model="data.system_it_ids"
+                label="name"
+                :multiple="true"
+                placeholder="Wybierz"
+                :internal-search="false"
+                track-by="name"
+                :options="systemsId">
+            </multiselect>
         </div>
         <div class="col-md-3 col-12">
             <label for="resources" class="form-label">Zasoby</label>
-
+            <multiselect
+                v-model="data.resource_ids"
+                label="name"
+                :multiple="true"
+                placeholder="Wybierz"
+                :internal-search="false"
+                track-by="name"
+                :options="resources">
+            </multiselect>
         </div>
         <div class="col-md-3 col-12">
             <label for="law_basics" class="form-label">Podstawy prawne</label>
-
+            <multiselect
+                v-model="data.law_basic_ids"
+                label="name"
+                :multiple="true"
+                placeholder="Wybierz"
+                :internal-search="false"
+                track-by="name"
+                :options="basicLaw">
+            </multiselect>
         </div>
     </div>
 
@@ -104,6 +134,7 @@
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Multiselect from 'vue-multiselect'
 export default {
     name: "DatasetFormComponent",
     data() {
@@ -122,15 +153,24 @@ export default {
                 processing: '',
                 estimated_data: '',
                 status_id: '',
-                system_id: ''
+                system_it_ids: '',
+                processing_area_ids: [],
+                law_basic_ids: [],
+                resource_ids: []
             },
             types: [],
             types2: [],
             categoriesPeople: [],
             statuses: [],
             editor: ClassicEditor,
-            systemsId: []
+            systemsId: [],
+            processingAreas: [],
+            basicLaw: [],
+            resources: []
         }
+    },
+    components: {
+        Multiselect
     },
     props: {
         save_url: '',
@@ -139,7 +179,7 @@ export default {
     },
     methods: {
         save() {
-
+            console.log(this.data.processing_area_ids)
         },
         loadStatuses() {
             this.$axios.get(`/inspector/api/get-statuses?resource_type=datasets`)
@@ -155,9 +195,37 @@ export default {
                     this.types = data.data.data;
                 })
         },
+        loadProcessingAreas() {
+            this.$axios.get('/inspector/api/processing-areas')
+                .then((data) => {
+                    this.processingAreas = data.data.data;
+                })
+        },
+        loadItSystems() {
+            this.$axios.get(`/inspector/api/assets/system-it`)
+            .then((data) => {
+                this.systemsId = data.data.data;
+            })
+        },
+        loadLawBasic() {
+            this.$axios.get(`/inspector/api/rcp/law-basic`)
+            .then((data) => {
+                this.basicLaw = data.data.data;
+            })
+        },
+        loadResources() {
+            this.$axios.get(`/inspector/api/assets/resources?type=`)
+            .then((data) => {
+                this.resources = data.data.data;
+            })
+        }
     },
     created() {
-        this.processing = JSON.parse(this.processing)
+        this.processing = JSON.parse(this.processing);
+        this.loadProcessingAreas();
+        this.loadItSystems();
+        this.loadLawBasic();
+        this.loadResources();
     }
 }
 </script>

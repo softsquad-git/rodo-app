@@ -2,15 +2,16 @@
 
 namespace App\Services\Meetings;
 
-use App\Helpers\Select;
 use App\Models\Meetings\Meeting;
+use App\Traits\GenerateNumber;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class MeetingService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param Meeting|null $meeting
@@ -31,14 +32,13 @@ class MeetingService
 
         DB::beginTransaction();
         try {
-            $data['number'] = Str::random(3);
+            $data['number'] = $this->generateRandomNumber();
             $data['user_id'] = Auth::id();
             /**
              * @var Meeting $meeting
              */
             $meeting = Meeting::create($data);
 
-            $data['participants'] = Select::getIdsFromArray($data['participants']);
             if (isset($data['participants']) && count($data['participants']) > 0) {
                 $meeting->participants()->sync($data['participants']);
             }

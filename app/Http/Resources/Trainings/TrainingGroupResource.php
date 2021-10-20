@@ -17,7 +17,9 @@ class TrainingGroupResource extends JsonResource
             'id' => $this->id,
             'number' => $this->number,
             'name' => $this->name,
-            'trainings' => $this->trainings
+            'trainings' => $this->trainings,
+            'departments' => $this->departments,
+            'tests' => $this->tests
         ];
     }
 }

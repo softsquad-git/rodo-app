@@ -57,6 +57,12 @@ class ApplicationIssueRepository
             $data->where('type_id', $filters['type_id']);
         }
 
+        if (isset($filters['employee_id']) && !empty($filters['employee_id'])) {
+            $data->whereHas('employees', function ($e) use ($filters) {
+                $e->where('employee_id', $filters['employee_id']);
+            });
+        }
+
         return $data->paginate($pagination);
     }
 }

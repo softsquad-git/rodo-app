@@ -1,57 +1,61 @@
 @extends('layouts.auth')
 @section('title', __('auth.login.title'))
 @section('content')
-    <div class="row justify-content-center push">
-        <div class="col-md-8 col-lg-6 col-xl-4">
-            <div class="block block-rounded mb-0">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title">{{ __('auth.login.title') }}</h3>
-                    <div class="block-options">
-                        <a class="btn-block-option fs-sm" href="">{{ __('auth.login.forgot_password') }}</a>
-                        <a class="btn-block-option" href="{{ route('register') }}" data-bs-toggle="tooltip" data-bs-placement="left" title="{{ __('auth.register.title') }}">
-                            <i class="fa fa-user-plus"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="block-content">
-                    <div class="p-sm-3 px-lg-4 px-xxl-5 py-lg-5">
-                        <h1 class="h2 mb-1">{{ $setting['app_name'] }}</h1>
-                        <p class="fw-medium text-muted">
-                            {{ __('auth.login.welcome') }}
-                        </p>
-                        <form action="{{ route('login') }}" method="POST">
-                            @csrf
-                            <div class="py-3">
-                                <div class="mb-4">
-                                    <input type="text" class="form-control form-control-alt form-control-lg" id="login-username" name="email" value="{{ old('email') }}" placeholder="{{ __('auth.form.email') }}" aria-label="{{ __('auth.form.email') }}">
-                                    @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-4">
-                                    <input type="password" class="form-control form-control-alt form-control-lg" id="login-password" name="password" placeholder="{{ __('auth.form.password') }}" aria-label="{{ __('auth.form.password') }}">
-                                    @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="login-remember" name="login-remember">
-                                        <label class="form-check-label" for="login-remember">{{ __('auth.login.remember_me') }}</label>
-                                    </div>
-                                </div>
+    <div class="p-4 w-100 flex-grow-1 d-flex align-items-center">
+        <div class="w-100">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <p class="mb-3">
+                    <img src="{{ asset('images/logo.png') }}" width="100px" alt="{{ config('app.name') }}">
+                </p>
+                <h1 class="fw-bold mb-2">
+                    Zaloguj się
+                </h1>
+            </div>
+            <!-- END Header -->
+            <div class="row g-0 justify-content-center">
+                <div class="col-sm-8 col-xl-4">
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
+                        <div class="mb-4">
+                            <input type="text" class="form-control form-control-lg form-control-alt py-3" id="email" name="email" placeholder="E-mail">
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-4">
+                            <input type="password" class="form-control form-control-lg form-control-alt py-3" id="password" name="password" placeholder="Hasło">
+                            @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                @if (Route::has('password.request'))
+                                    <a class="text-muted fs-sm fw-medium d-block d-lg-inline-block mb-1" href="{{ route('password.request') }}">
+                                        Przypomnij hasło
+                                    </a>
+                                @endif
                             </div>
-                            <div class="row mb-4">
-                                <div class="col-md-6 col-xl-5">
-                                    <button type="submit" class="btn w-100 btn-alt-primary">
-                                        <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> {{ __('auth.login.title') }}
-                                    </button>
-                                </div>
+                            <div>
+                                <button type="submit" class="btn btn-lg btn-alt-primary">
+                                    <i class="fa fa-fw fa-sign-in-alt me-1 opacity-50"></i> Zaloguj
+                                </button>
                             </div>
-                        </form>
+                        </div>
+                    </form>
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <a href="" class="btn btn-primary btn-sm w-100">Zaloguj z Facebook</a>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <a href="" class="btn btn-secondary btn-sm w-100">Zaloguj z Google</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- END Sign In Form -->
         </div>
     </div>
 @endsection

@@ -3,12 +3,14 @@
 namespace App\Services\Clients;
 
 use App\Models\Clients\Client;
+use App\Traits\GenerateNumber;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use Illuminate\Support\Str;
 
 class ClientService
 {
+    use GenerateNumber;
+
     public function __construct(
         private ClientSmtpConfigurationService $clientSmtpConfigurationService
     )
@@ -30,7 +32,7 @@ class ClientService
         DB::beginTransaction();
         try {
             $clientData = $data['data'];
-            $clientData['auto_number'] = Str::random(4);
+            $clientData['auto_number'] = $this->generateRandomNumber();
             /**
              * @var Client $client
              */

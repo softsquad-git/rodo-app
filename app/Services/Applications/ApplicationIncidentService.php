@@ -45,6 +45,24 @@ class ApplicationIncidentService
                 }
             }
 
+            if (isset($data['employees']) && count($data['employees']) > 0) {
+                $employeeIds = [];
+                foreach ($data['employees'] as $employee) {
+                    $employeeIds[] = $employee['id'];
+                }
+
+                $item->employees()->sync($employeeIds);
+            }
+
+            if (isset($data['activities']) && count($data['activities']) > 0) {
+                $activityIds = [];
+                foreach ($data['activities'] as $activity) {
+                    $activityIds[] = $activity['id'];
+                }
+
+                $item->activities()->sync($activityIds);
+            }
+
             DB::commit();
             return $item;
         } catch (Exception $e) {

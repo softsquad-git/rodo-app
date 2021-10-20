@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-md-8 col-12">
                             <label for="name" class="form-label">{{ __('inspector.rcp.law_basic.form.name') }}</label>
-                            <input type="text" class="form-control" id="name"
+                            <input type="text" class="form-control" name="name" id="name"
                                    value="{{ $item->name ? $item->name : old('name') }}">
                             @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>

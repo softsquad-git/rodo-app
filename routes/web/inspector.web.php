@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () {
-    Route::get('', 'InspectorController')
+    Route::match(['get', 'post'], '', 'InspectorController')
         ->name('inspector.index');
 
     Route::group(['prefix' => 'profile'], function () {
@@ -47,6 +47,11 @@ Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () 
             ->name('inspector.newsletter.create');
         Route::match(['get', 'post'], 'update/{id}', 'NewsletterPostController@update')
             ->name('inspector.newsletter.update');
+
+        Route::group(['prefix' => 'mailbox'], function () {
+           Route::get('', 'NewsletterMailboxController')
+               ->name('inspector.newsletter.mailbox.index');
+        });
     });
 
     Route::group(['prefix' => 'documents', 'namespace' => 'Documents'], function () {
@@ -126,6 +131,14 @@ Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () 
             Route::match(['get', 'post'], 'update/{id}', 'SystemItController@update')
                 ->name('inspector.assets.system_it.update');
         });
+        Route::group(['prefix' => 'resources'], function () {
+            Route::get('', 'ResourcesController')
+                ->name('inspector.assets.resources.index');
+            Route::match(['get', 'post'], 'create', 'ResourcesController@create')
+                ->name('inspector.assets.resources.create');
+            Route::match(['get', 'post'], 'update/{id}', 'ResourcesController@update')
+                ->name('inspector.assets.resources.update');
+        });
     });
 
     Route::group(['prefix' => 'rcp', 'namespace' => 'RCP'], function () {
@@ -155,6 +168,25 @@ Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () 
         });
     });
 
+    Route::group(['prefix' => 'processing-areas', 'namespace' => 'ProcessingAreas'], function () {
+       Route::get('', 'ProcessingAreaController')
+           ->name('inspector.processing_areas.index');
+       Route::match(['get', 'post'], 'create', 'ProcessingAreaController@create')
+           ->name('inspector.processing_areas.create');
+       Route::match(['get', 'post'], 'update/{id}', 'ProcessingAreaController@update')
+           ->name('inspector.processing_areas.update');
+    });
+
+    Route::group(['prefix' => 'trainings', 'namespace' => 'Trainings'], function () {
+       Route::get('', 'TrainingsController')
+           ->name('inspector.trainings.index');
+
+       Route::group(['prefix' => 'tests'], function () {
+           Route::get('', 'TrainingTestController')
+               ->name('inspector.trainings.tests.index');
+       });
+    });
+
     Route::group(['prefix' => 'api'], function () {
         Route::get('get-statuses', 'InspectorController@getStatuses');
 
@@ -168,6 +200,20 @@ Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () 
             Route::get('', 'EmployeeController@all')
                 ->name('api.inspector.employees.list');
             Route::delete('remove/{id}', 'EmployeeController@remove');
+
+            Route::group(['prefix' => 'authorizations'], function () {
+                Route::get('', 'EmployeeAuthorizationController@all');
+                Route::post('create', 'EmployeeAuthorizationController@create');
+                Route::patch('update/{id}', 'EmployeeAuthorizationController@update');
+                Route::delete('remove/{id}', 'EmployeeAuthorizationController@remove');
+            });
+
+            Route::group(['prefix' => 'permissions'], function () {
+               Route::get('', 'EmployeePermissionController@all');
+               Route::post('create', 'EmployeePermissionController@create');
+               Route::patch('update/{id}', 'EmployeePermissionController@update');
+               Route::delete('remove/{id}', 'EmployeePermissionController@remvove');
+            });
         });
 
         Route::group(['prefix' => 'departments', 'namespace' => 'Departments'], function () {
@@ -230,10 +276,15 @@ Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () 
         });
 
         Route::group(['prefix' => 'assets', 'namespace' => 'Assets'], function () {
-            Route::group(['prefix' => 'system-id'], function () {
+            Route::group(['prefix' => 'system-it'], function () {
                 Route::get('', 'SystemItController@all')
                     ->name('api.inspector.assets.system_it.list');
                 Route::delete('remove/{id}', 'SystemItController@remove');
+            });
+            Route::group(['prefix' => 'resources'], function () {
+                Route::get('', 'ResourcesController@all')
+                    ->name('api.inspector.assets.resources.list');
+                Route::delete('remove/{id}', 'ResourcesController@remove');
             });
         });
 
@@ -253,6 +304,24 @@ Route::group(['prefix' => 'inspector', 'namespace' => 'Inspector'], function () 
                    ->name('api.inspector.rcp.data_retention.list');
                Route::delete('remove/{id}', 'RCPDataRetentionController@remove');
            });
+        });
+
+        Route::group(['prefix' => 'processing-areas', 'namespace' => 'ProcessingAreas'], function () {
+           Route::get('', 'ProcessingAreaController@all')
+               ->name('api.inspector.processing_areas.list');
+           Route::delete('remove/{id}', 'ProcessingAreaController@remove');
+        });
+
+        Route::group(['prefix' => 'trainings', 'namespace' => 'Trainings'], function () {
+            Route::get('', 'TrainingsController@all')
+                ->name('api.inspector.trainings.list');
+            Route::patch('assign-group-department/{groupId}', 'TrainingsController@assignGroupDepartment');
+
+            Route::group(['prefix' => 'tests'], function () {
+               Route::get('', 'TrainingTestController@all')
+                   ->name('api.inspector.trainings.tests.list');
+               Route::patch('assign-test-department/{testId}', 'TrainingTestController@assignTestDepartment');
+            });
         });
 
     });

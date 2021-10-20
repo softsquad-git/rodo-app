@@ -2,21 +2,22 @@
 
 namespace App\Models\RiskAnalysis;
 
+use App\Models\ProcessingAreas\ProcessingArea;
 use App\Models\Settings\Status;
 use App\Models\Types\Type;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int id
  * @property string number
  * @property string name
  * @property string description
- * @property int type_id
  * @property int status_id
  * @property Status status
- * @property Type type
+ * @property string type
  * @method static create(array $data)
  * @method static orderBy(string $orderingColumn, string $orderingSort)
  * @method static find(int $id)
@@ -37,8 +38,19 @@ class Security extends Model
         'number',
         'name',
         'description',
-        'type_id',
+        'type',
         'status_id'
+    ];
+
+    /**
+     * @var array|string[] $types
+     */
+    public static array $types = [
+        'physical' => 'physical',                   #do obszaru
+        'technical' => 'technical',                 #do zasobu
+        'it' => 'it',                               #do systemów IT
+        'organizational' => 'organizational',       #do firmy
+        'another' => 'another'                      #widziane u każdego
     ];
 
     /**
@@ -47,13 +59,11 @@ class Security extends Model
     public static string $resourceType = 'security';
 
     /**
-     * @return BelongsTo
+     * @return string
      */
-    public function type(): BelongsTo
+    public function getType(): string
     {
-        return $this->belongsTo(Type::class)
-            ->where('resource_type', self::$resourceType)
-            ->withDefault();
+        return __('trans.security_types.' . $this->type);
     }
 
     /**
@@ -64,5 +74,17 @@ class Security extends Model
         return $this->belongsTo(Status::class)
             ->where('resource_type', self::$resourceType)
             ->withDefault();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function processing_areas(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            ProcessingArea::class,
+            'processing_area_security_pivot',
+            'security',
+            'processing_area_id');
     }
 }

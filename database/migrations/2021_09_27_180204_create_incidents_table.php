@@ -19,7 +19,7 @@ class CreateIncidentsTable extends Migration
             $table->dateTime('date_application');
             $table->dateTime('date_receipt_company')->nullable();
             $table->dateTime('date_writing')->nullable();
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->index();
             $table->string('type_author');
             $table->string('author_name')->nullable();
             $table->string('title');

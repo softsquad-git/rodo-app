@@ -3,10 +3,12 @@
 namespace App\Services\Trainings;
 
 use App\Models\Trainings\TrainingGroup;
-use Illuminate\Support\Str;
+use App\Traits\GenerateNumber;
 
 class TrainingGroupService
 {
+    use GenerateNumber;
+
     /**
      * @param array $data
      * @param TrainingGroup|null $trainingGroup
@@ -20,7 +22,7 @@ class TrainingGroupService
             return $trainingGroup;
         }
 
-        $data['number'] = Str::random(3);
+        $data['number'] = $this->generateRandomNumber();
         return TrainingGroup::create($data);
     }
 
@@ -31,5 +33,17 @@ class TrainingGroupService
     public function remove(TrainingGroup $trainingGroup): ?bool
     {
         return $trainingGroup->delete();
+    }
+
+    /**
+     * @param array $departmentIds
+     * @param TrainingGroup $trainingGroup
+     * @return TrainingGroup
+     */
+    public function assignGroupDepartment(array $departmentIds, TrainingGroup $trainingGroup): TrainingGroup
+    {
+        $trainingGroup->departments()->sync($departmentIds);
+
+        return $trainingGroup;
     }
 }

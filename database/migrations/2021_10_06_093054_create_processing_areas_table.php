@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientsInspectorsPivotTable extends Migration
+class CreateProcessingAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateClientsInspectorsPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients_inspectors_pivot', function (Blueprint $table) {
+        Schema::create('processing_areas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('client_id')->index();
-            $table->unsignedInteger('inspector_id')->index();
+            $table->string('number');
+            $table->string('name');
+            $table->unsignedInteger('localization_id')->index()->nullable(); //obszar nadrzędny
+            $table->timestamps();
         });
     }
 
@@ -27,6 +29,6 @@ class CreateClientsInspectorsPivotTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients_inspectors_pivot');
+        Schema::dropIfExists('processing_areas');
     }
 }

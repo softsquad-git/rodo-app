@@ -2,10 +2,12 @@
 
 namespace App\Models\RCP;
 
+use App\Models\Applications\ApplicationIncident;
 use App\Models\Settings\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int id
@@ -50,5 +52,18 @@ class RCPActivity extends Model
         return $this->belongsTo(Status::class)
             ->where('resource_type', self::$resourceType)
             ->withDefault();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function incidents(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            ApplicationIncident::class,
+            'incident_activities_pivot',
+            'activity_id',
+            'incident_id'
+        );
     }
 }

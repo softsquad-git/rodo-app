@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static insert(array[] $data)
  * @method static find(int $id)
  * @method static truncate()
+ * @method static where(array $filters)
  */
 class Setting extends Model
 {
@@ -43,7 +44,8 @@ class Setting extends Model
      */
     public static array $names = [
         'app_name' => 'app_name',
-        'logo' => 'logo'
+        'logo' => 'logo',
+        'number_pattern' => 'number_pattern'
     ];
 
     /**

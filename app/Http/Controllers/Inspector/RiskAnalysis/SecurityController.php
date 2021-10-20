@@ -24,13 +24,11 @@ class SecurityController extends ApiController
      * @param SecurityRepository $securityRepository
      * @param SecurityService $securityService
      * @param StatusRepository $statusRepository
-     * @param TypeRepository $typeRepository
      */
     public function __construct(
         private SecurityRepository $securityRepository,
         private SecurityService    $securityService,
         private StatusRepository   $statusRepository,
-        private TypeRepository     $typeRepository
     )
     {
     }
@@ -41,7 +39,8 @@ class SecurityController extends ApiController
     public function __invoke(): Application|Factory|View
     {
         return view('inspector.risk_analysis.security.index', [
-            'title' => __('inspector.risk_analysis.security.title')
+            'title' => __('inspector.risk_analysis.security.title'),
+            'types' => __('trans.security_types')
         ]);
     }
 
@@ -78,7 +77,7 @@ class SecurityController extends ApiController
             'title' => __('inspector.risk_analysis.security.form.create.title'),
             'item' => new Security(),
             'statuses' => $this->statusRepository->findAll(Security::$resourceType),
-            'types' => $this->typeRepository->findAll(Security::$resourceType)
+            'types' => Security::$types
         ]);
     }
 
@@ -105,7 +104,7 @@ class SecurityController extends ApiController
             'title' => __('inspector.risk_analysis.security.form.edit.title'),
             'item' => $item,
             'statuses' => $this->statusRepository->findAll(Security::$resourceType),
-            'types' => $this->typeRepository->findAll(Security::$resourceType)
+            'types' => Security::$types
         ]);
     }
 

@@ -2,42 +2,16 @@
 
 namespace App\Services\Certificates;
 
-use App\Models\Clients\ClientCertificate;
-use Illuminate\Support\Facades\DB;
-use Exception;
+use App\Models\Employees\EmployeeCertificate;
 
 class CertificateService
 {
     /**
-     * @param array $filters
-     * @param ClientCertificate|null $clientCertificate
-     * @return ClientCertificate
-     * @throws Exception
-     */
-    public function save(array $filters, ClientCertificate $clientCertificate = null): ClientCertificate
-    {
-        if ($clientCertificate) {
-
-            return $clientCertificate;
-        }
-
-        DB::beginTransaction();
-        try {
-
-            DB::commit();
-            return $clientCertificate;
-        } catch (Exception $e) {
-            DB::rollBack();
-            throw new Exception($e->getMessage());
-        }
-    }
-
-    /**
-     * @param ClientCertificate $clientCertificate
+     * @param EmployeeCertificate $employeeCertificate
      * @return bool|null
      */
-    public function remove(ClientCertificate $clientCertificate): ?bool
+    public function remove(EmployeeCertificate $employeeCertificate): ?bool
     {
-        return $clientCertificate->delete();
+        return $employeeCertificate->delete();
     }
 }

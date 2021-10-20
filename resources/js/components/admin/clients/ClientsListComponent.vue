@@ -48,12 +48,48 @@
                    class="table table-bordered table-striped table-vcenter js-dataTable-full">
                 <thead>
                 <tr>
-                    <th class="text-center" style="width: 80px;">#</th>
-                    <th>Numer</th>
-                    <th class="d-none d-sm-table-cell" style="width: 30%;">Skrót</th>
-                    <th class="d-none d-sm-table-cell" style="width: 15%;">Nazwa</th>
-                    <th style="width: 15%;">Typ</th>
-                    <th style="width: 15%;">Status</th>
+                    <th class="text-center" style="width: 80px;">
+                        #
+                        <div class="ordering">
+                            <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('created_at', 'DESC')"></span>
+                            <span class="fa fa-sort-down sort-down cursor" @click="ordering('created_at', 'ASC')"></span>
+                        </div>
+                    </th>
+                    <th style="width: 100px">
+                        Numer
+                        <div class="ordering">
+                            <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('number', 'DESC')"></span>
+                            <span class="fa fa-sort-down sort-down cursor" @click="ordering('number', 'ASC')"></span>
+                        </div>
+                    </th>
+                    <th class="d-none d-sm-table-cell" style="width: 30%;">
+                        Skrót
+                        <div class="ordering">
+                            <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('number', 'DESC')"></span>
+                            <span class="fa fa-sort-down sort-down cursor" @click="ordering('number', 'ASC')"></span>
+                        </div>
+                    </th>
+                    <th class="d-none d-sm-table-cell" style="width: 15%;">
+                        Nazwa
+                        <div class="ordering">
+                            <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('name', 'DESC')"></span>
+                            <span class="fa fa-sort-down sort-down cursor" @click="ordering('name', 'ASC')"></span>
+                        </div>
+                    </th>
+                    <th style="width: 15%;">
+                        Typ
+                        <div class="ordering">
+                            <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('type_id', 'DESC')"></span>
+                            <span class="fa fa-sort-down sort-down cursor" @click="ordering('type_id', 'ASC')"></span>
+                        </div>
+                    </th>
+                    <th style="width: 15%;">
+                        Status
+                        <div class="ordering">
+                            <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('status_id', 'DESC')"></span>
+                            <span class="fa fa-sort-down sort-down cursor" @click="ordering('status_id', 'ASC')"></span>
+                        </div>
+                    </th>
                     <th style="width: 15%;"></th>
                 </tr>
                 </thead>
@@ -117,7 +153,9 @@ export default {
                 type_id: '',
                 status_id: '',
                 pagination: 20,
-                is_archive: 0
+                is_archive: 0,
+                ordering_column: 'id',
+                ordering_sort: 'desc'
             },
             paginationNumbers: [5, 10, 20, 30, 50],
             isSearchBox: false,
@@ -131,7 +169,7 @@ export default {
     },
     methods: {
         loadData(page = 1) {
-            this.$axios.get(this.list_url + `?page=${page}&is_archive=${this.filters.is_archive}`)
+            this.$axios.get(this.list_url + `?page=${page}&is_archive=${this.filters.is_archive}&pagination=${this.filters.pagination}&ordering_column=${this.filters.ordering_column}&ordering_sort=${this.filters.ordering_sort}`)
                 .then((data) => {
                     this.data = data.data;
                 }).catch((error) => {
@@ -212,6 +250,11 @@ export default {
             .then((data) => {
                 this.types = data.data.data;
             })
+        },
+        ordering(column, sort) {
+            this.filters.ordering_sort = sort;
+            this.filters.ordering_column = column;
+            this.loadData();
         }
     },
     created() {

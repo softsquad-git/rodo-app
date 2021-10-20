@@ -86,10 +86,8 @@ Route::group(['prefix' => 'administration', 'namespace' => 'Admin'], function ()
     Route::group(['prefix' => 'certificates', 'namespace' => 'Certificates'], function () {
         Route::get('', 'CertificateController')
             ->name('admin.certificates.index');
-        Route::match(['get', 'post'], 'create', 'CertificateController@create')
-            ->name('admin.certificates.create');
-        Route::match(['get', 'post'], 'update/{id}', 'CertificateController@update')
-            ->name('admin.certificates.update');
+        Route::delete('remove/{id}', 'CertificateController@remove')
+            ->name('admin.certificates.remove');
 
         Route::group(['prefix' => 'patters'], function () {
             Route::get('', 'CertificatePattersController')

@@ -34,6 +34,9 @@ class TestQuestion extends Model
      */
     public function answers(): HasMany
     {
-        return $this->hasMany(TestQuestionAnswer::class, 'question_id');
+        return $this->hasMany(
+            TestQuestionAnswer::class,
+            'test_question_id'
+        );
     }
 }

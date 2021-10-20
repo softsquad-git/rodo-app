@@ -29,71 +29,65 @@
             </div>
         </div>
         <div class="row mt-3">
-            <div class="col-md-3 col-12">
-                <label for="client" class="form-label">Klient</label>
-                <select class="form-control" v-model="data.client_id" id="client">
-                    <option v-for="client in clients" :value="client.id">{{ client.name }}</option>
-                </select>
-            </div>
-            <div class="col-md-3 col-12">
-                <label for="role" class="form-label">Rola</label>
-                <select class="form-control" v-model="data.role_id" id="role">
-                    <option v-for="role in roles" :value="role.id">{{ role.name }}</option>
-                </select>
-            </div>
-            <div class="col-md-3 col-12">
-                <label for="departments" class="form-label">Działy</label>
-                <multiselect
-                    v-model="data.department_ids"
-                    :options="departments"
-                    :multiple="true"
-                    :close-on-select="false"
-                    :clear-on-select="false"
-                    :preserve-search="true"
-                    label="name"
-                    track-by="id"
-                    :preselect-first="true">
-
-                </multiselect>
-            </div>
-            <div class="col-md-3 col-12">
-                <label for="type_contract" class="form-label">Rodzaj umowy</label>
-                <select class="form-control" v-model="data.type_contract_id" id="type_contract">
-                    <option v-for="typeContract in typesContract" :value="typeContract.id">{{ typeContract.name }}
-                    </option>
-                </select>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-8 col-12">
-                <label for="comments" class="form-label">Komentarz</label>
-                <textarea v-model="data.comments" rows="4" id="comments" class="form-control"></textarea>
-            </div>
-            <div class="col-md-4 col-12">
-                <label for="end_date_contract" class="form-label">Data końca umowy</label>
-                <input type="date" class="form-control form-control-sm" :readonly="!!data.is_contract_indefinite_period" v-model="data.end_date_contract" id="end_date_contract">
-                <label for="is_contract_indefinite_period" class="w-100"><input type="checkbox" value="1" id="is_contract_indefinite_period" v-model="data.is_contract_indefinite_period"> Umowa na czas nieokreślony</label>
-
-                <!--attachments-->
-                <label for="docs" class="form-label mt-3">Dokumenty</label>
-                <div v-for="(doc, index) in data.attachments" class="row mb-1">
-                    <div class="col-sm-12">
-                        <input type="text" class="form-control-alt form-control br-0 form-control-sm" placeholder="Tytuł" v-model="doc.title">
-                    </div>
-                    <div class="col-sm-4 pr-0">
-                        <select v-model="doc.type_id" class="form-control br-0 form-control-alt form-control-sm">
-                            <option value="" selected>Rodzaj</option>
-                            <option v-for="typeDoc in typesAttachment" :value="typeDoc.id">{{ typeDoc.name }}</option>
+            <div class="col-md-9 col-12">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <label for="client" class="form-label">Klient</label>
+                        <select class="form-control" v-model="data.client_id" id="client">
+                            <option v-for="client in clients" :value="client.id">{{ client.name }}</option>
                         </select>
                     </div>
-                    <div class="col-sm-8 pl-0">
-                        <input type="file" class="form-control-sm br-0 form-control form-control-alt">
+                    <div class="col-md-4 col-12">
+                        <label for="role" class="form-label">Rola</label>
+                        <select class="form-control" v-model="data.role_id" id="role">
+                            <option v-for="role in roles" :value="role.id">{{ role.name }}</option>
+                        </select>
                     </div>
-                    <span class="cursor" v-if="data.attachments.length > 1" @click="removeAttachment(index)" style="font-size: 13px;color: #f83e3e;"> <i class="fa fa-trash"></i> Usuń</span>
+                    <div class="col-md-4 col-12">
+                        <label for="type_contract" class="form-label">Rodzaj umowy</label>
+                        <select class="form-control" v-model="data.type_contract_id" id="type_contract">
+                            <option v-for="typeContract in typesContract" :value="typeContract.id">{{ typeContract.name }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <span class="cursor" @click="addAttachment" style="font-size: 13px;color: #4c78dd;"> <i class="fa fa-plus"></i> Dodaj</span>
+                <div class="row mt-3">
+                    <div class="col-md-7 col-12">
+                        <label for="comments" class="form-label">Komentarz</label>
+                        <textarea v-model="data.comments" rows="4" id="comments" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-5 col-12">
+                        <label for="end_date_contract" class="form-label">Data końca umowy</label>
+                        <input type="date" class="form-control form-control-sm" :readonly="!!data.is_contract_indefinite_period" v-model="data.end_date_contract" id="end_date_contract">
+                        <label for="is_contract_indefinite_period" class="w-100"><input type="checkbox" value="1" id="is_contract_indefinite_period" v-model="data.is_contract_indefinite_period"> Umowa na czas nieokreślony</label>
 
+                        <!--attachments-->
+                        <label for="docs" class="form-label mt-3">Dokumenty</label>
+                        <div v-for="(doc, index) in data.attachments" class="row mb-1">
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control-alt form-control br-0 form-control-sm" placeholder="Tytuł" v-model="doc.title">
+                            </div>
+                            <div class="col-sm-4 pr-0">
+                                <select v-model="doc.type_id" class="form-control br-0 form-control-alt form-control-sm">
+                                    <option value="" selected>Rodzaj</option>
+                                    <option v-for="typeDoc in typesAttachment" :value="typeDoc.id">{{ typeDoc.name }}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-8 pl-0">
+                                <input type="file" class="form-control-sm br-0 form-control form-control-alt">
+                            </div>
+                            <span class="cursor" v-if="data.attachments.length > 1" @click="removeAttachment(index)" style="font-size: 13px;color: #f83e3e;"> <i class="fa fa-trash"></i> Usuń</span>
+                        </div>
+                        <span class="cursor" @click="addAttachment" style="font-size: 13px;color: #4c78dd;"> <i class="fa fa-plus"></i> Dodaj</span>
+
+                    </div>
+                </div>
             </div>
+            <div class="col-md-3 col-12">
+                <label for="departments" class="form-label mt-3">Przypisane działy</label>
+                <label v-for="department in departments" class="form-check-label w-100" :for="'department'+department.id"><input type="checkbox" class="form-check-input" v-model="data.department_ids" :value="department.id" :id="'department'+department.id"> {{ department.name }}</label>
+            </div>
+
         </div>
         <div class="row mt-3">
             <div class="col-12">
@@ -196,7 +190,7 @@ export default {
             })
         },
         removeAttachment(index) {
-
+            this.data.attachments.splice(index, 1);
         }
     },
     created() {

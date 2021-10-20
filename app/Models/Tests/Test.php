@@ -3,6 +3,7 @@
 namespace App\Models\Tests;
 
 use App\Models\Certificates\CertificatePattern;
+use App\Models\Departments\Department;
 use App\Models\Trainings\TrainingGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int|null group_id
  * @method static find(int $id)
  * @method static create(array $data)
+ * @method static orderBy(string $orderingColumn, string $orderingSort)
  */
 class Test extends Model
 {
@@ -54,7 +56,12 @@ class Test extends Model
      */
     public function questions(): BelongsToMany
     {
-        return $this->belongsToMany(TestQuestion::class, 'test_question_pivot', 'test_id', 'question_id');
+        return $this->belongsToMany(
+            TestQuestion::class,
+            'test_question_pivot',
+            'test_id',
+            'question_id'
+        );
     }
 
     /**
@@ -62,6 +69,24 @@ class Test extends Model
      */
     public function certificates(): BelongsToMany
     {
-        return $this->belongsToMany(CertificatePattern::class, 'certificate_patter_test_pivot', 'test_id', 'certificate_patter_id');
+        return $this->belongsToMany(
+            CertificatePattern::class,
+            'certificate_patter_test_pivot',
+            'test_id',
+            'certificate_patter_id'
+        );
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function departments(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Department::class,
+            'test_department_pivot',
+            'test_id',
+            'department_id'
+        );
     }
 }

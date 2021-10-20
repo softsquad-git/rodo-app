@@ -24,10 +24,10 @@ class TestRepository
      * @return LengthAwarePaginator
      */
     public function findBy(
-        array $filters,
-        string $orderingColumn,
-        string $orderingSort,
-        int $pagination
+        array $filters = [],
+        string $orderingColumn = 'id',
+        string $orderingSort = 'DESC',
+        int $pagination = 20
     ): LengthAwarePaginator
     {
         $data = Test::orderBy($orderingColumn, $orderingSort);
@@ -42,6 +42,16 @@ class TestRepository
 
         if (isset($filters['group_id']) && !empty($filters['group_id'])) {
             $data->where('group_id', $filters['group_id']);
+        }
+
+        if (isset($filters['employee_id']) && !empty($filters['employee_id'])) {
+            $data->whereHas('departments', function ($department) use ($filters) {
+               $department->whereHas('employees', function ($employee) use ($filters) {
+                   $employee->whereHas('user', function ($user) use ($filters) {
+                       $user->where('id', $filters['employee_id']);
+                   });
+               });
+            });
         }
 
         return $data->paginate($pagination);

@@ -26,5 +26,12 @@ return [
         'media' => 'Media',
         'business_partner' => 'Partner biznesoowy',
         'third_party' => 'Osoba trzecia'
+    ],
+    'security_types' => [
+        'physical' => 'Fizyczne',
+        'technical' => 'Techniczne',
+        'it' => 'Informatyczne',
+        'organizational' => 'Organizacyjne',
+        'another' => 'Inne'
     ]
 ];

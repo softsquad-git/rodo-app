@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin\Certificates;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Requests\Certificates\CertificateRequest;
-use App\Repositories\Certificates\CertificateRepository;
+use App\Http\Resources\Certificates\CertificateResource;
+use App\Repositories\Employees\EmployeeCertificateRepository;
 use App\Services\Certificates\CertificateService;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -16,8 +18,8 @@ use Exception;
 class CertificateController extends ApiController
 {
     public function __construct(
-        private CertificateService $certificateService,
-        private CertificateRepository $certificateRepository
+        private EmployeeCertificateRepository $employeeCertificateRepository,
+        private CertificateService $certificateService
     )
     {
     }
@@ -32,19 +34,15 @@ class CertificateController extends ApiController
         ]);
     }
 
-    public function all(Request $request)
+    /**
+     * @param Request $request
+     * @return AnonymousResourceCollection
+     */
+    public function all(Request $request): AnonymousResourceCollection
     {
+        $data = $this->employeeCertificateRepository->findBy($request->all());
 
-    }
-
-    public function create(CertificateRequest $request)
-    {
-
-    }
-
-    public function update(CertificateRequest $request, int $id)
-    {
-
+        return CertificateResource::collection($data);
     }
 
     /**
@@ -53,7 +51,7 @@ class CertificateController extends ApiController
      */
     public function remove(int $id): JsonResponse
     {
-        $item = $this->certificateRepository->find($id);
+        $item = $this->employeeCertificateRepository->find($id);
         if (!$item) {
             return $this->itemNoExist();
         }

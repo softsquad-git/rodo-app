@@ -51,13 +51,53 @@
                 <table v-if="data.data.length > 0 "  class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                     <tr>
-                        <th class="text-center" style="width: 80px;">#</th>
-                        <th>Numer</th>
-                        <th class="d-none d-sm-table-cell" style="width: 30%;">E-mail</th>
-                        <th class="d-none d-sm-table-cell" style="width: 15%;">Imię i nazwisko</th>
-                        <th style="width: 15%;">Typ konta</th>
-                        <th style="width: 15%;">Klient</th>
-                        <th style="width: 15%;">Status</th>
+                        <th class="text-center" style="width: 80px;">#
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('created_at', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('created_at', 'ASC')"></span>
+                            </div>
+                        </th>
+                        <th style="width: 100px">Numer
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('number', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('number', 'ASC')"></span>
+                            </div>
+                        </th>
+                        <th class="d-none d-sm-table-cell" style="width: 30%;">
+                            E-mail
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('email', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('email', 'ASC')"></span>
+                            </div>
+                        </th>
+                        <th class="d-none d-sm-table-cell" style="width: 15%;">
+                            Imię i nazwisko
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('name', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('name', 'ASC')"></span>
+                            </div>
+                        </th>
+                        <th style="width: 15%;">
+                            Typ konta
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('type_id', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('type_id', 'ASC')"></span>
+                            </div>
+                        </th>
+                        <th style="width: 15%;">
+                            Klient
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('client', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('client', 'ASC')"></span>
+                            </div>
+                        </th>
+                        <th style="width: 15%;">
+                            Status
+                            <div class="ordering">
+                                <span class="fa fa-sort-up position-absolute cursor" style="top: 2px" @click="ordering('status_id', 'DESC')"></span>
+                                <span class="fa fa-sort-down sort-down cursor" @click="ordering('status_id', 'ASC')"></span>
+                            </div>
+                        </th>
                         <th style="width: 15%;"></th>
                     </tr>
                     </thead>
@@ -116,7 +156,9 @@ export default {
                 email: '',
                 role: '',
                 status_id: '',
-                pagination: 20
+                pagination: 20,
+                ordering_column: 'id',
+                ordering_sort: 'desc'
             },
             paginationNumbers: [5, 10, 20, 30, 50],
             isSearchBox: false,
@@ -129,7 +171,7 @@ export default {
     },
     methods: {
         loadData(page = 1) {
-            this.$axios.get(this.list_url+`?page=${page}`)
+            this.$axios.get(this.list_url+`?page=${page}&pagination=${this.filters.pagination}&ordering_column=${this.filters.ordering_column}&ordering_sort=${this.filters.ordering_sort}`)
                 .then((data) => {
                     this.data =data.data;
                 }).catch((error) => {})
@@ -173,6 +215,11 @@ export default {
                 //
             })
         },
+        ordering(column, sort) {
+            this.filters.ordering_column = column;
+            this.filters.ordering_sort = sort;
+            this.loadData();
+        }
     },
     created() {
         this.loadData();
