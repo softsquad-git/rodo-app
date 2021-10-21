@@ -29,7 +29,6 @@
                     <button class="btn btn-sm btn-primary mt-5" type="submit">Zakończ test</button>
                 </form>
 
-                <button id="showTest" class="btn btn-outline-success btn-sm">Rozpocznij test</button>
             </div>
         </div>
     </div>

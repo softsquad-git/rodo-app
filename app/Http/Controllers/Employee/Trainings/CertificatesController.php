@@ -48,6 +48,7 @@ class CertificatesController extends ApiController
         return CertificateResource::collection($data);
     }
 
+
     public function download(int $id)
     {
         $certificate = $this->employeeCertificateRepository->find($id);

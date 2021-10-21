@@ -3,6 +3,7 @@
 namespace App\Services\Employees;
 
 use App\Helpers\Role;
+use App\Interfaces\MailInterface;
 use App\Models\Employees\Employee;
 use App\Models\Users\User;
 use App\Traits\GenerateNumber;
@@ -16,6 +17,13 @@ class EmployeeService
 {
     use UploadFileTrait;
     use GenerateNumber;
+
+    public function __construct(
+        private MailInterface $mail
+    )
+    {
+
+    }
 
     /**
      * @param array $data
@@ -56,6 +64,17 @@ class EmployeeService
             if (isset($data['department_ids']) && count($data['department_ids']) > 0) {
                 $employee->departments()->sync($data['department_ids']);
             }
+
+            $this->mail
+                ->setTo($user->email)
+                ->setFrom(config('mail.from'))
+                ->setSubject(__('_mail.subjects.welcome_employee'))
+                ->setTemplate('inspector.employees.welcome')
+                ->setBody([
+                    'user' => $user,
+                    'generatePassword' => $generatePassword
+                ])
+                ->send();
 
             DB::commit();
             return $employee;

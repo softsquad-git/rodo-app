@@ -9,21 +9,13 @@ use Illuminate\Support\Str;
 trait GenerateNumber
 {
     /**
-     * @param SettingRepository $settingRepository
-     */
-    public function __construct(
-        private SettingRepository $settingRepository
-    )
-    {
-    }
-
-    /**
      * @param int $lengthGenerateNumber
      * @return array|string
      */
     public function generateRandomNumber(int $lengthGenerateNumber = 5): array|string
     {
-        $patternItem = $this->settingRepository->findByOne(['name' => Setting::$names['number_pattern']]);
+        $settingRepository = new SettingRepository();
+        $patternItem = $settingRepository->findByOne(['name' => Setting::$names['number_pattern']]);
         if (!$patternItem) {
             return Str::random(3);
         }

@@ -3,6 +3,7 @@
 namespace App\Repositories\Trainings\Tests;
 
 use App\Models\Tests\Test;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class TestRepository
@@ -21,14 +22,14 @@ class TestRepository
      * @param string $orderingColumn
      * @param string $orderingSort
      * @param int $pagination
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator|Collection|array
      */
     public function findBy(
         array $filters = [],
         string $orderingColumn = 'id',
         string $orderingSort = 'DESC',
         int $pagination = 20
-    ): LengthAwarePaginator
+    ): LengthAwarePaginator|Collection|array
     {
         $data = Test::orderBy($orderingColumn, $orderingSort);
 
@@ -52,6 +53,10 @@ class TestRepository
                    });
                });
             });
+        }
+
+        if (isset($filters['is_all']) && $filters['is_all'] === true) {
+            return $data->get();
         }
 
         return $data->paginate($pagination);

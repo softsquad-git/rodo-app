@@ -3,6 +3,7 @@
 namespace App\Repositories\Employees;
 
 use App\Models\Employees\EmployeeCertificate;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class EmployeeCertificateRepository
@@ -21,14 +22,14 @@ class EmployeeCertificateRepository
      * @param string $orderingColumn
      * @param string $orderingSort
      * @param int $pagination
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator|Collection|array
      */
     public function findBy(
         array  $filters = [],
         string $orderingColumn = 'id',
         string $orderingSort = 'DESC',
         int    $pagination = 20
-    ): LengthAwarePaginator
+    ): LengthAwarePaginator|Collection|array
     {
         $data = EmployeeCertificate::orderBy($orderingColumn, $orderingSort);
 
@@ -46,6 +47,10 @@ class EmployeeCertificateRepository
 
         if (isset($filters['client_id']) && !empty($filters['client_id'])) {
             $data->where('client_id', $filters['client_id']);
+        }
+
+        if (isset($filters['is_all']) && $filters['is_all'] === true) {
+            return $data->get();
         }
 
         return $data->paginate($pagination);
