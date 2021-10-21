@@ -42,5 +42,8 @@ class LoginController extends Controller
         if ($user->role == Role::$role['INSPECTOR']) {
             return redirect()->route('inspector.index');
         }
+        if ($user->role == Role::$role['EMPLOYEE']) {
+            return redirect()->route('employee.index');
+        }
     }
 }
